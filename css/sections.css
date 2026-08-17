@@ -1,139 +1,144 @@
 /* ==========================================================================
-   天机阁 · 各阶段页面核心布局与动效样式 (Sections Layout & Animations)
+   天机阁 · 各阶段页面与液态玻璃舞台布局 (Liquid Glass Stage Layouts)
    ========================================================================== */
 
-/* 1. 首页 Hero 区域 */
-.hero-section-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 3rem 1rem 4rem;
-  max-width: 900px;
-  margin: 0 auto;
+.app-step-section {
+  display: none;
+  animation: fadeInStep 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-.hero-emblem-wrap {
-  position: relative;
-  width: 140px;
-  height: 140px;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.app-step-section.active-step {
+  display: block;
 }
 
-.hero-emblem-circle {
-  font-size: 5.5rem;
-  color: var(--gold-bright);
-  filter: drop-shadow(0 0 24px var(--gold-glow));
-  animation: rotateTaiji 30s linear infinite;
+@keyframes fadeInStep {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-@keyframes rotateTaiji {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.hero-badge-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 1.2rem;
-  background: hsla(42, 60%, 20%, 0.4);
-  border: 1px solid var(--border-gold);
-  border-radius: var(--radius-full);
-  color: var(--gold-bright);
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
-  letter-spacing: 0.15em;
-  margin-bottom: 1.25rem;
-}
-
-.hero-main-title {
-  font-size: 2.8rem;
-  line-height: 1.25;
-  margin-bottom: 1.25rem;
-  background: linear-gradient(135deg, #ffffff 0%, var(--gold-bright) 50%, var(--gold-main) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.8);
-}
-
-.hero-desc {
-  font-size: 1.15rem;
-  color: var(--text-secondary);
-  max-width: 720px;
-  line-height: 1.8;
-  margin-bottom: 2.5rem;
-}
-
-.hero-features-row {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
-}
-
-.feature-pill {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--radius-md);
-  font-size: 0.95rem;
-}
-
-.feature-icon {
-  font-size: 1.2rem;
-}
-
-/* 2. 主题选择阶段 (Topic Selector) */
+/* 统一通透页面头部 */
 .section-page-header {
   text-align: center;
   margin-bottom: 2.5rem;
 }
 
 .page-step-indicator {
-  font-size: 0.85rem;
-  color: var(--gold-main);
-  letter-spacing: 0.2em;
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+  background: rgba(243, 209, 121, 0.08);
+  border: 1px solid rgba(243, 209, 121, 0.25);
+  padding: 0.25rem 0.85rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(10px);
 }
 
 .page-main-title {
-  font-size: 2.2rem;
-  color: var(--text-primary);
-  margin-bottom: 0.6rem;
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #dcdde1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .page-sub-desc {
-  font-size: 1rem;
-  color: var(--text-muted);
+  font-size: 0.96rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
+/* 0. 首页 (Hero) */
+.hero-section-layout {
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.hero-emblem-wrap {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.hero-emblem-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(243, 209, 121, 0.15) 0%, rgba(18, 24, 38, 0.7) 100%);
+  border: 1px solid rgba(243, 209, 121, 0.4);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px var(--gold-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.4rem;
+  color: var(--gold-bright);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.hero-badge-tag {
+  font-size: 0.88rem;
+  color: var(--gold-bright);
+  letter-spacing: 0.2em;
+  margin-bottom: 1.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.4rem 1.25rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(12px);
+}
+
+.hero-main-title {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #e0e2ec 60%, #b8bcc8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 1. 主题选择阶段 (Topics) */
 .topics-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  max-width: 1050px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .topic-select-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(18, 24, 38, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-lg);
   padding: 2rem 1.5rem;
+  cursor: pointer;
+  box-shadow: var(--glass-card-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  cursor: pointer;
+  gap: 0.8rem;
   transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -142,177 +147,158 @@
 .topic-select-card::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--topic-color, var(--gold-main));
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, var(--topic-glow, rgba(212, 175, 55, 0.15)) 0%, transparent 70%);
   opacity: 0.4;
+  pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
 .topic-select-card:hover {
   transform: translateY(-6px);
-  border-color: var(--topic-color, var(--gold-main));
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--topic-glow, var(--gold-glow));
-  background: var(--bg-card-hover);
+  border-color: rgba(243, 209, 121, 0.45);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px var(--topic-glow, var(--gold-glow));
 }
 
 .topic-select-card:hover::before {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .topic-card-icon {
-  font-size: 3rem;
-  margin-bottom: 1.25rem;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+  font-size: 2.6rem;
+  margin-bottom: 0.25rem;
 }
 
 .topic-card-title {
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
+  color: #fff;
 }
 
 .topic-card-element {
-  font-size: 0.85rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-sm);
-  margin-bottom: 0.9rem;
-  background: hsla(220, 20%, 20%, 0.8);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 .topic-card-desc {
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
-/* 3. 生辰八字输入与展示阶段 (BaZi Form & Chart) */
+/* 2. 八字排盘阶段 (BaZi) */
 .bazi-layout-grid {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
+  grid-template-columns: 1fr 1.25fr;
   gap: 2rem;
-  max-width: 1100px;
+  max-width: 1050px;
   margin: 0 auto;
-  align-items: start;
 }
 
 .bazi-input-panel {
   background: var(--bg-card);
-  border: 1px solid var(--border-gold);
+  border: var(--glass-border);
   border-radius: var(--radius-lg);
-  padding: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  padding: 2rem;
+  box-shadow: var(--glass-card-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
 }
 
-.gender-radio-group {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 0.25rem;
-}
-
-.gender-radio-label {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  cursor: pointer;
-  font-size: 0.95rem;
+.box-title {
+  font-size: 1.25rem;
+  color: var(--gold-bright);
+  margin-bottom: 1.25rem;
 }
 
 .bazi-select-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .bazi-action-btns {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.75rem;
 }
 
 /* 八字命盘卡片 */
 .bazi-chart-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-gold);
+  background: rgba(18, 24, 38, 0.65);
+  border: 1px solid rgba(243, 209, 121, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-lg);
-  padding: 1.75rem;
-  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px var(--gold-glow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .bazi-chart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.bazi-chart-title {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
 
 .bazi-badge-gold {
-  background: var(--gold-main);
-  color: #111;
+  font-size: 1.15rem;
   font-weight: 700;
-  font-size: 0.8rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-sm);
+  color: var(--gold-bright);
+  font-family: var(--font-serif);
 }
 
 .bazi-pillars-summary {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
-  color: var(--text-primary);
-  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  margin-left: 0.6rem;
 }
 
 .btn-toggle-bazi-mode {
-  background: none;
-  border: 1px solid var(--border-gold);
-  color: var(--gold-bright);
-  padding: 0.35rem 0.8rem;
-  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-secondary);
   font-size: 0.8rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .btn-toggle-bazi-mode:hover {
-  background: var(--gold-main);
-  color: #111;
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
 }
 
+/* 四柱展示 */
 .bazi-pillars-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
 }
 
 .pillar-col {
-  background: hsla(220, 20%, 10%, 0.6);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
-  padding: 0.85rem 0.5rem;
+  padding: 1rem 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .pillar-col.active-master {
-  border-color: var(--gold-bright);
-  background: hsla(42, 60%, 15%, 0.3);
-  box-shadow: 0 0 12px var(--gold-glow);
+  background: rgba(243, 209, 121, 0.08);
+  border-color: rgba(243, 209, 121, 0.45);
+  box-shadow: 0 0 14px var(--gold-glow);
 }
 
 .p-tag {
@@ -320,32 +306,31 @@
   color: var(--text-muted);
 }
 
-.p-val.stem {
+.p-val {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 900;
+  color: #fff;
+}
+
+.p-val.master-stem {
   color: var(--gold-bright);
 }
 
-.p-val.branch {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  color: var(--text-primary);
-}
-
 .p-wuxing {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gold-bright);
 }
 
 .bazi-wuxing-summary-row {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background: hsla(220, 20%, 10%, 0.4);
-  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.25);
   padding: 1rem;
-  margin-bottom: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .bazi-master-info {
@@ -381,7 +366,7 @@
 
 .wx-progress-track {
   height: 6px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
   overflow: hidden;
 }
@@ -393,19 +378,19 @@
 }
 
 .bazi-explanation-box {
-  background: hsla(220, 20%, 9%, 0.8);
+  background: rgba(14, 19, 30, 0.75);
   border-left: 3px solid var(--gold-main);
   padding: 1rem;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 .bazi-exp-text {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   line-height: 1.7;
   color: var(--text-primary);
 }
 
-/* 4. 罗盘方位选择阶段 (Compass) */
+/* 3. 罗盘方位选择阶段 (Compass) */
 .compass-layout-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -427,19 +412,17 @@
   width: 320px;
   height: 320px;
   border-radius: 50%;
-  background: radial-gradient(circle, hsl(220, 25%, 15%) 0%, hsl(220, 25%, 8%) 100%);
-  border: 4px solid var(--gold-main);
-  box-shadow: 0 0 35px var(--gold-glow), inset 0 0 25px rgba(0,0,0,0.8);
+  background: radial-gradient(circle, rgba(25, 34, 52, 0.7) 0%, rgba(10, 14, 22, 0.85) 100%);
+  border: 2px solid rgba(243, 209, 121, 0.5);
+  box-shadow: 0 0 40px var(--gold-glow), inset 0 0 30px rgba(0,0,0,0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: grab;
   user-select: none;
   touch-action: none;
-}
-
-.compass-dial-outer:active {
-  cursor: grabbing;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
 }
 
 .compass-dial {
@@ -447,79 +430,78 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-image: 
-    radial-gradient(circle at 50% 50%, transparent 68%, rgba(212, 175, 55, 0.25) 70%, transparent 72%),
-    radial-gradient(circle at 50% 50%, transparent 48%, rgba(212, 175, 55, 0.15) 50%, transparent 52%);
-  transition: transform 0.05s linear;
+  transition: transform 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
 }
 
 .dial-bagua-labels {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .dial-item {
   position: absolute;
   font-family: var(--font-serif);
-  font-weight: 700;
   font-size: 0.95rem;
-  color: var(--gold-bright);
-  transform-origin: center;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-weight: 700;
+  color: var(--text-secondary);
+  width: 50px;
+  text-align: center;
 }
 
-.dial-item.dir-n  { top: 8px; left: 145px; color: var(--cinnabar); }
-.dial-item.dir-ne { top: 46px; right: 46px; }
-.dial-item.dir-e  { top: 145px; right: 8px; }
-.dial-item.dir-se { bottom: 46px; right: 46px; }
-.dial-item.dir-s  { bottom: 8px; left: 145px; }
-.dial-item.dir-sw { bottom: 46px; left: 46px; }
-.dial-item.dir-w  { top: 145px; left: 8px; }
-.dial-item.dir-nw { top: 46px; left: 46px; }
+.dial-item.dir-n { top: 12px; left: calc(50% - 25px); color: var(--wx-water); }
+.dial-item.dir-ne { top: 48px; right: 48px; color: var(--wx-earth); }
+.dial-item.dir-e { top: calc(50% - 12px); right: 12px; color: var(--wx-wood); }
+.dial-item.dir-se { bottom: 48px; right: 48px; color: var(--wx-wood); }
+.dial-item.dir-s { bottom: 12px; left: calc(50% - 25px); color: var(--wx-fire); font-size: 1.05rem; }
+.dial-item.dir-sw { bottom: 48px; left: 48px; color: var(--wx-earth); }
+.dial-item.dir-w { top: calc(50% - 12px); left: 12px; color: var(--wx-metal); }
+.dial-item.dir-nw { top: 48px; left: 48px; color: var(--wx-metal); }
 
 .compass-needle {
   position: absolute;
-  width: 14px;
-  height: 180px;
-  z-index: 10;
+  width: 6px;
+  height: 220px;
   pointer-events: none;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-out;
 }
 
 .needle-north {
-  flex: 1;
-  background: linear-gradient(to top, #777, var(--cinnabar));
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 100px solid var(--cinnabar);
+  filter: drop-shadow(0 0 8px var(--cinnabar-glow));
 }
 
 .needle-south {
-  flex: 1;
-  background: linear-gradient(to bottom, #777, #fff);
-  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 100px solid var(--gold-bright);
+  filter: drop-shadow(0 0 8px var(--gold-glow));
 }
 
 .needle-pivot {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
+  background: var(--gold-bright);
   border-radius: 50%;
-  background: radial-gradient(circle, var(--gold-bright) 0%, var(--gold-muted) 100%);
-  border: 2px solid #fff;
-  box-shadow: 0 0 10px rgba(0,0,0,0.8);
+  border: 2px solid #000;
+  box-shadow: 0 0 8px rgba(0,0,0,0.8);
 }
 
 .compass-center-taiji {
   font-size: 2.2rem;
   color: var(--gold-bright);
-  opacity: 0.3;
+  opacity: 0.35;
   pointer-events: none;
 }
 
@@ -529,12 +511,15 @@
 
 .compass-info-panel {
   background: var(--bg-card);
-  border: 1px solid var(--border-gold);
+  border: var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  box-shadow: var(--glass-card-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
 }
 
 .compass-current-badge {
@@ -561,11 +546,11 @@
   font-weight: 700;
   padding: 0.2rem 0.6rem;
   border-radius: var(--radius-sm);
-  background: hsla(220, 20%, 20%, 0.8);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .compass-desc-text {
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.7;
   color: var(--text-secondary);
 }
@@ -589,8 +574,8 @@
 
 .compass-quick-btn {
   padding: 0.6rem 0.4rem;
-  background: hsl(220, 20%, 10%);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
   font-size: 0.85rem;
@@ -601,10 +586,10 @@
 .compass-quick-btn:hover, .compass-quick-btn.active {
   border-color: var(--gold-bright);
   color: var(--gold-bright);
-  background: hsla(42, 60%, 18%, 0.4);
+  background: rgba(243, 209, 121, 0.12);
 }
 
-/* 5. 洗牌过渡阶段 (Shuffle) */
+/* 4. 洗牌过渡阶段 (Shuffle) */
 .shuffle-animation-stage {
   display: flex;
   flex-direction: column;
@@ -628,7 +613,7 @@
   width: 100%;
   height: 100%;
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   animation: stackShuffle 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
@@ -659,7 +644,7 @@
   color: var(--text-muted);
 }
 
-/* 6. 扇形选牌阶段 (Cards Fan) */
+/* 5. 扇形选牌阶段 (Cards Fan) */
 .cards-selection-layout {
   display: flex;
   flex-direction: column;
@@ -669,7 +654,7 @@
 
 .cards-fan-container {
   width: 100%;
-  min-height: 400px;
+  min-height: 380px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -699,9 +684,9 @@
 .fan-card-inner {
   width: 100%;
   height: 100%;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-gold);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   overflow: hidden;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -713,7 +698,7 @@
   }
   .fan-card-item:hover .fan-card-inner {
     border-color: var(--gold-bright);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 16px var(--gold-glow);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 20px var(--gold-glow);
   }
 }
 
@@ -757,13 +742,16 @@
   width: 100%;
   max-width: 850px;
   background: var(--bg-card);
-  border: 1px solid var(--border-gold);
+  border: var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 1.25rem 1.5rem;
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  box-shadow: var(--glass-card-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
 }
 
 .selected-bar-title {
@@ -783,257 +771,271 @@
 }
 
 .selected-slot {
-  background: hsla(220, 20%, 9%, 0.8);
-  border: 1px dashed var(--border-subtle);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-md);
-  padding: 0.85rem;
+  padding: 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 0.4rem;
-  min-height: 85px;
   justify-content: center;
+  gap: 0.4rem;
+  min-height: 80px;
+  transition: all 0.25s ease;
 }
 
 .selected-slot.filled {
-  border-style: solid;
-  border-color: var(--gold-main);
-  background: hsla(42, 60%, 15%, 0.25);
+  background: rgba(243, 209, 121, 0.08);
+  border: 1px solid rgba(243, 209, 121, 0.4);
+  box-shadow: 0 0 15px var(--gold-glow);
 }
 
-.slot-badge {
+.slot-pos-tag {
   font-size: 0.75rem;
   color: var(--text-muted);
-}
-
-.slot-card-preview {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
 }
 
 .slot-card-name {
   font-family: var(--font-serif);
+  font-size: 0.95rem;
   font-weight: 700;
-  font-size: 1rem;
-  color: var(--gold-bright);
-}
-
-.slot-card-ori {
-  font-size: 0.75rem;
-  padding: 0.1rem 0.35rem;
-  border-radius: 3px;
-}
-.slot-card-ori.ori-up { background: var(--wx-wood); color: #fff; }
-.slot-card-ori.ori-rev { background: var(--cinnabar); color: #fff; }
-
-.slot-empty-placeholder {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  color: #fff;
 }
 
 .cards-action-footer {
-  margin-top: 2rem;
   display: flex;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
-/* 7. 八卦阵位落牌与3D翻牌阶段 (Spread Altar) */
+/* 6. 三才落牌与3D翻转祭坛 (Spread Altar) */
 .spread-altar-layout {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  max-width: 1050px;
-  margin: 0 auto 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-.spread-position-col {
+.spread-column {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem 1rem;
-  position: relative;
-  transition: all 0.4s ease;
+  gap: 1.25rem;
 }
 
-.position-header {
+.spread-header-badge {
   text-align: center;
-  margin-bottom: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
 }
 
-.pos-symbol {
-  font-size: 1.8rem;
+.spread-pos-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--gold-bright);
 }
 
-.pos-title {
-  font-family: var(--font-serif);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.pos-aspect {
+.spread-pos-aspect {
   font-size: 0.8rem;
   color: var(--text-muted);
 }
 
-.position-card-slot {
-  width: 100%;
-  max-width: 220px;
-  position: relative;
+.spread-card-altar {
+  width: 170px;
+  height: 285px;
 }
 
-/* 8. 结果页 (Result Report) */
+/* 7. 综合解盘结果页 (Result Report) */
 .result-report-layout {
-  max-width: 1100px;
+  max-width: 1050px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
+/* Tab 切换栏 */
 .result-tabs-nav {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .tab-nav-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-full);
   color: var(--text-secondary);
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  padding: 0.8rem 2rem;
-  border-radius: var(--radius-md);
+  font-size: 0.96rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transition: all 0.25s ease;
+}
+
+.tab-nav-btn:hover {
+  border-color: rgba(243, 209, 121, 0.4);
+  color: var(--gold-bright);
 }
 
 .tab-nav-btn.active {
-  background: linear-gradient(135deg, hsl(42, 85%, 52%) 0%, hsl(40, 75%, 42%) 100%);
-  color: #111;
-  font-weight: 700;
+  background: rgba(243, 209, 121, 0.12);
   border-color: var(--gold-bright);
-  box-shadow: 0 4px 16px var(--gold-glow);
+  color: var(--gold-bright);
+  box-shadow: 0 0 20px var(--gold-glow);
 }
 
 .tab-panel-content {
   display: none;
+  animation: fadeInStep 0.35s ease forwards;
 }
 
 .tab-panel-content.active {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 /* 总览卡片 */
 .result-overview-box {
   background: var(--bg-card);
-  border: 1px solid var(--border-gold);
+  border: var(--glass-border);
+  border-top: 1px solid rgba(243, 209, 121, 0.5);
   border-radius: var(--radius-lg);
-  padding: 2.2rem;
+  padding: 2.25rem 2rem;
   text-align: center;
-  box-shadow: var(--shadow-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  box-shadow: var(--glass-shadow), 0 0 30px var(--gold-glow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
 }
 
 .overview-header-tag {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   font-size: 0.85rem;
   color: var(--text-muted);
+  margin-bottom: 1rem;
 }
 
-.tag-topic {
-  color: var(--gold-bright);
-  font-weight: 700;
-}
+.tag-topic { color: var(--gold-bright); font-weight: 700; }
+.tag-facing { color: var(--wx-water); }
 
 .overview-keyphrase {
   font-family: var(--font-serif);
   font-size: 2.2rem;
   font-weight: 900;
-  color: var(--text-gold);
   letter-spacing: 0.1em;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-}
-
-.overview-summary-text {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: var(--text-primary);
-  max-width: 800px;
-}
-
-/* 雷达与风水区域 */
-.result-radar-grid-row {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-.radar-card-inner {
-  background: var(--bg-card);
-  border: 1px solid var(--border-gold);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.radar-title-row {
+  background: linear-gradient(180deg, #ffffff 0%, #f3d179 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
 }
 
-.box-title {
-  font-size: 1.25rem;
-  color: var(--gold-bright);
-  margin-bottom: 0.3rem;
+.overview-summary-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 五行雷达与风水调理双列 */
+.result-radar-grid-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+}
+
+.radar-card-inner, .fengshui-card-inner {
+  background: var(--bg-card);
+  border: var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--glass-card-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.radar-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .radar-balance-badge {
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: var(--gold-bright);
+  background: rgba(243, 209, 121, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
 }
 
 .radar-svg-wrapper {
-  margin: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
 }
 
 .radar-desc-caption {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.5;
-  margin-top: 0.5rem;
+  line-height: 1.6;
+  text-align: center;
 }
 
-.radar-label {
-  font-family: var(--font-serif);
-  font-size: 0.8rem;
-  font-weight: 700;
+/* 风水调理条目 */
+.fengshui-grid-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-/* 三张牌详解列表 */
+.fs-item {
+  display: grid;
+  grid-template-columns: 28px 75px 1fr;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.fs-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.fs-val {
+  color: var(--text-primary);
+}
+
+.fs-mindset-quote {
+  margin-top: auto;
+  padding: 0.85rem;
+  background: rgba(243, 209, 121, 0.06);
+  border-left: 3px solid var(--gold-bright);
+  font-size: 0.85rem;
+  color: var(--gold-bright);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* 三才逐牌详析列表 */
 .result-cards-detail-list {
   display: flex;
   flex-direction: column;
@@ -1042,40 +1044,42 @@
 
 .result-card-detail-card {
   background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  border: var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
+  box-shadow: var(--glass-card-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition: transform 0.2s ease;
 }
 
 .card-detail-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding-bottom: 0.6rem;
 }
 
 .pos-badge {
   font-family: var(--font-serif);
-  font-weight: 700;
   font-size: 1.1rem;
+  font-weight: 700;
   color: var(--gold-bright);
 }
 
 .pos-aspect-sub {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
 }
 
 .card-detail-body {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 110px 1fr;
   gap: 1.5rem;
-  align-items: start;
+  align-items: center;
 }
 
 .card-mini-thumb {
@@ -1083,7 +1087,7 @@
   height: 168px;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
 .card-detail-content {
@@ -1100,18 +1104,18 @@
 
 .c-name {
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #fff;
 }
 
 .c-ori {
   font-size: 0.8rem;
   padding: 0.15rem 0.5rem;
-  border-radius: var(--radius-sm);
+  border-radius: 4px;
 }
-.c-ori.up { background: var(--wx-wood); color: #fff; }
-.c-ori.rev { background: var(--cinnabar); color: #fff; }
+.c-ori.up { background: rgba(46, 204, 113, 0.2); color: var(--wx-wood); }
+.c-ori.rev { background: rgba(231, 76, 60, 0.2); color: var(--wx-fire); }
 
 .c-wuxing {
   font-size: 0.8rem;
@@ -1119,119 +1123,56 @@
 }
 
 .c-keywords {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
 }
 
 .c-meaning-text {
-  font-size: 1rem;
+  font-size: 0.94rem;
   line-height: 1.7;
   color: var(--text-primary);
 }
 
 .c-spatial-text {
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   color: var(--text-secondary);
-  background: hsla(220, 20%, 10%, 0.5);
+  background: rgba(0, 0, 0, 0.2);
   padding: 0.6rem 0.85rem;
   border-radius: var(--radius-sm);
   border-left: 2px solid var(--gold-main);
 }
 
-/* 境物相调风水指南卡片 */
-.fengshui-card-inner {
-  background: var(--bg-card);
-  border: 1px solid var(--border-gold);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.fengshui-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 1rem;
-}
-
-.fengshui-badge {
-  font-size: 0.85rem;
-  color: var(--gold-bright);
-  background: hsla(42, 60%, 20%, 0.4);
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-gold);
-}
-
-.fengshui-grid-items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.25rem;
-}
-
-.fs-item {
-  background: hsla(220, 20%, 10%, 0.6);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.fs-icon {
-  font-size: 1.6rem;
-}
-
-.fs-label {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.fs-val {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  line-height: 1.5;
-}
-
-.fs-mindset-quote {
-  text-align: center;
-  font-family: var(--font-serif);
-  color: var(--gold-bright);
-  font-size: 1rem;
-  padding-top: 0.5rem;
-}
-
-/* DeepSeek 深度解盘容器 */
+/* DeepSeek 流式解盘容器 */
 .deepseek-stream-box {
   background: var(--bg-card);
-  border: 1px solid var(--border-gold);
+  border: var(--glass-border);
+  border-top: 1px solid rgba(243, 209, 121, 0.5);
   border-radius: var(--radius-lg);
-  padding: 2.5rem;
-  box-shadow: var(--shadow-lg);
-  min-height: 400px;
-  position: relative;
+  padding: 2.25rem;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  min-height: 380px;
 }
 
 .deepseek-stream-status {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-family: var(--font-serif);
+  font-size: 0.92rem;
   color: var(--gold-bright);
-  font-size: 1rem;
   margin-bottom: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(243, 209, 121, 0.08);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(243, 209, 121, 0.25);
 }
 
 .streaming-spinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--gold-main);
-  border-top-color: transparent;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(243, 209, 121, 0.3);
+  border-top-color: var(--gold-bright);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -1241,33 +1182,28 @@
 }
 
 .deepseek-no-key-prompt {
+  text-align: center;
+  padding: 3rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding: 4rem 1.5rem;
-  gap: 1.25rem;
-  max-width: 580px;
-  margin: 0 auto;
+  gap: 1rem;
 }
 
-.deepseek-no-key-prompt .prompt-icon {
-  font-size: 3.5rem;
-}
+.prompt-icon { font-size: 3rem; }
 
-/* Markdown 排版样式 */
-.markdown-body {
+.deepseek-stream-content.markdown-body {
   font-family: var(--font-serif);
   line-height: 1.9;
   color: var(--text-primary);
-  font-size: 1.08rem;
+  font-size: 1.05rem;
 }
 
 .markdown-body h1, .markdown-body h2, .markdown-body h3 {
   color: var(--gold-bright);
   margin-top: 1.75rem;
   margin-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding-bottom: 0.4rem;
 }
 
@@ -1289,68 +1225,24 @@
   margin-bottom: 0.5rem;
 }
 
-/* 结果页底部操作栏 */
-.result-actions-footer {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-}
-
-/* 响应式调整 */
-@media (max-width: 900px) {
-  .bazi-layout-grid {
-    grid-template-columns: 1fr;
-  }
-  .compass-layout-container {
-    grid-template-columns: 1fr;
-  }
-  .result-radar-grid-row {
-    grid-template-columns: 1fr;
-  }
-  .spread-altar-layout {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  .hero-main-title {
-    font-size: 2rem;
-  }
-  .hero-desc {
-    font-size: 1rem;
-  }
-  .bazi-pillars-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .card-detail-body {
-    grid-template-columns: 1fr;
-  }
-  .card-mini-thumb {
-    margin: 0 auto;
-  }
-  .overview-keyphrase {
-    font-size: 1.6rem;
-  }
-}
-
-/* ==================== 8. 天机阁主·多轮交互追问解惑模块样式 ==================== */
+/* 8. 天机阁主·多轮交互追问解惑模块样式 (Liquid Glass) */
 .result-chat-section {
   background: var(--bg-card);
-  border: 1px solid var(--border-gold);
+  border: 1px solid rgba(243, 209, 121, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-lg);
-  padding: 1.75rem 2rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-top: 1rem;
+  box-shadow: var(--glass-shadow), 0 0 25px var(--gold-glow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
 
 .chat-section-header {
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding-bottom: 1rem;
 }
 
@@ -1361,15 +1253,15 @@
 }
 
 .chat-avatar {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--gold-main) 0%, hsl(220, 25%, 15%) 100%);
+  background: radial-gradient(circle, var(--gold-bright) 0%, #151c2a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
-  box-shadow: 0 0 14px var(--gold-glow);
+  font-size: 1.5rem;
+  box-shadow: 0 0 16px var(--gold-glow);
   flex-shrink: 0;
 }
 
@@ -1393,10 +1285,10 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
-  background: hsla(220, 20%, 9%, 0.6);
+  background: rgba(0, 0, 0, 0.3);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
-  border: 1px dashed var(--border-subtle);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
 }
 
 .quick-prompt-label {
@@ -1407,19 +1299,20 @@
 }
 
 .btn-quick-prompt {
-  background: hsl(220, 20%, 14%);
-  border: 1px solid var(--border-subtle);
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
   color: var(--text-secondary);
   font-size: 0.8rem;
   padding: 0.35rem 0.85rem;
   cursor: pointer;
+  backdrop-filter: blur(10px);
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 
 .btn-quick-prompt:hover {
-  background: hsla(42, 60%, 20%, 0.5);
+  background: rgba(243, 209, 121, 0.15);
   border-color: var(--gold-bright);
   color: var(--gold-bright);
 }
@@ -1439,7 +1332,7 @@
   display: flex;
   gap: 0.85rem;
   max-width: 90%;
-  animation: fadeIn 0.3s ease;
+  animation: fadeInStep 0.3s ease;
 }
 
 .chat-message-row.msg-sage {
@@ -1460,38 +1353,38 @@
   justify-content: center;
   font-size: 1.1rem;
   flex-shrink: 0;
-  background: hsl(220, 25%, 18%);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .msg-sage .msg-avatar {
-  background: radial-gradient(circle, var(--gold-main) 0%, hsl(220, 25%, 15%) 100%);
-  color: #fff;
+  background: radial-gradient(circle, var(--gold-bright) 0%, #1a2233 100%);
+  color: #000;
   box-shadow: 0 0 10px var(--gold-glow);
 }
 
 .msg-user .msg-avatar {
-  background: hsla(0, 65%, 45%, 0.8);
+  background: rgba(224, 74, 63, 0.85);
   color: #fff;
   border-color: var(--cinnabar);
 }
 
 .msg-bubble {
-  background: hsl(220, 22%, 11%);
-  border: 1px solid var(--border-subtle);
+  background: rgba(14, 19, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   padding: 0.85rem 1.15rem;
   line-height: 1.7;
+  backdrop-filter: blur(12px);
 }
 
 .msg-sage .msg-bubble {
   border-left: 3px solid var(--gold-main);
-  background: hsla(220, 25%, 10%, 0.85);
 }
 
 .msg-user .msg-bubble {
   border-right: 3px solid var(--cinnabar);
-  background: hsla(0, 45%, 15%, 0.35);
+  background: rgba(224, 74, 63, 0.15);
   color: var(--text-primary);
 }
 
@@ -1529,8 +1422,8 @@
 
 .chat-textarea {
   flex: 1;
-  background: hsl(220, 20%, 8%);
-  border: 1px solid var(--border-subtle);
+  background: rgba(10, 14, 22, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
   padding: 0.75rem 1rem;
   color: var(--text-primary);
@@ -1538,13 +1431,15 @@
   font-size: 0.95rem;
   resize: none;
   line-height: 1.5;
-  transition: border-color 0.2s ease;
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
 }
 
 .chat-textarea:focus {
   outline: none;
   border-color: var(--gold-bright);
-  box-shadow: 0 0 10px var(--gold-glow);
+  box-shadow: 0 0 12px var(--gold-glow);
+  background: rgba(14, 19, 30, 0.9);
 }
 
 .btn-chat-send {
@@ -1553,7 +1448,47 @@
   font-size: 0.95rem;
 }
 
+/* 结果页底部操作栏 */
+.result-actions-footer {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+/* 响应式调整 */
+@media (max-width: 900px) {
+  .bazi-layout-grid {
+    grid-template-columns: 1fr;
+  }
+  .compass-layout-container {
+    grid-template-columns: 1fr;
+  }
+  .result-radar-grid-row {
+    grid-template-columns: 1fr;
+  }
+  .spread-altar-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 600px) {
+  .hero-main-title {
+    font-size: 2.1rem;
+  }
+  .bazi-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card-detail-body {
+    grid-template-columns: 1fr;
+  }
+  .card-mini-thumb {
+    margin: 0 auto;
+  }
+  .overview-keyphrase {
+    font-size: 1.6rem;
+  }
   .result-chat-section {
     padding: 1.25rem 1rem;
   }
@@ -1568,4 +1503,3 @@
     width: 100%;
   }
 }
-

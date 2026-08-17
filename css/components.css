@@ -1,134 +1,172 @@
 /* ==========================================================================
-   天机阁 · 通用UI组件库与3D卡牌动效样式 (Components & 3D Cards)
+   天机阁 · 液态玻璃组件设计系统 (Liquid Glass Components)
    ========================================================================== */
 
-/* 1. 按钮组件 */
+/* 1. 按钮体系 */
 .btn-primary {
+  background: linear-gradient(135deg, rgba(243, 209, 121, 0.9) 0%, rgba(212, 175, 55, 0.85) 100%);
+  color: #0a0d14;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 0.85rem 1.85rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.96rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.85rem 2rem;
-  background: linear-gradient(135deg, hsl(42, 85%, 52%) 0%, hsl(40, 75%, 42%) 100%);
-  color: hsl(220, 30%, 8%);
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  border: 1px solid var(--gold-bright);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  box-shadow: 0 4px 18px var(--gold-glow);
+  gap: 0.6rem;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
   transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -60%;
-  width: 40%;
-  height: 200%;
-  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.4), rgba(255,255,255,0));
-  transform: rotate(30deg);
-  transition: all 0.6s ease;
-}
-
-.btn-primary:hover:not(:disabled)::after {
-  left: 120%;
+  user-select: none;
 }
 
 .btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ffffff 0%, #f3d179 60%, #d4af37 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px var(--gold-glow), 0 0 12px var(--gold-bright);
-  background: linear-gradient(135deg, hsl(45, 95%, 60%) 0%, hsl(42, 85%, 48%) 100%);
+  box-shadow: 0 12px 30px rgba(212, 175, 55, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .btn-primary:active:not(:disabled) {
-  transform: translateY(1px);
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-primary:disabled {
-  opacity: 0.45;
+  opacity: 0.35;
   cursor: not-allowed;
-  filter: grayscale(0.6);
+  filter: grayscale(0.8);
   box-shadow: none;
 }
 
 .btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.85rem 1.65rem;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-size: 0.92rem;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.8rem 1.6rem;
-  background: hsla(220, 20%, 14%, 0.8);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: 500;
-  border: 1px solid var(--border-gold);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: all 0.2s ease;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.25s ease;
 }
 
 .btn-secondary:hover {
-  background: hsla(220, 25%, 22%, 0.95);
-  border-color: var(--gold-bright);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(243, 209, 121, 0.35);
   color: var(--gold-bright);
   transform: translateY(-1px);
 }
 
-.btn-icon-header {
+.btn-pulse {
+  animation: pulseGlow 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+  50% {
+    box-shadow: 0 12px 36px rgba(243, 209, 121, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* 2. 表单与选择控件 */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+}
+
+.form-select, .form-input {
+  background: rgba(14, 19, 30, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 0.8rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+.form-select:focus, .form-input:focus {
+  border-color: rgba(243, 209, 121, 0.6);
+  box-shadow: 0 0 16px var(--gold-glow), inset 0 2px 4px rgba(0,0,0,0.4);
+  background: rgba(18, 25, 40, 0.85);
+}
+
+.form-select option {
+  background: #121824;
+  color: #fff;
+}
+
+.form-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* 性别单选 */
+.gender-radio-group {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.gender-radio-label {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.45rem 0.9rem;
-  background: hsla(220, 18%, 14%, 0.6);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  color: var(--text-secondary);
-  font-size: 0.85rem;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  color: var(--text-primary);
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-full);
   transition: all 0.2s ease;
 }
 
-.btn-icon-header:hover {
-  border-color: var(--gold-main);
+.gender-radio-label:has(input:checked) {
+  background: rgba(243, 209, 121, 0.12);
+  border-color: rgba(243, 209, 121, 0.5);
   color: var(--gold-bright);
-  background: hsla(220, 20%, 18%, 0.9);
 }
 
-.btn-pulse {
-  animation: buttonPulse 1.8s infinite;
-}
-
-@keyframes buttonPulse {
-  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-  70% { box-shadow: 0 0 0 16px rgba(212, 175, 55, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-}
-
-/* 2. 模态弹窗与历史抽屉 */
+/* 3. 液态玻璃模态框 (Modal) */
 .app-modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 200;
+  padding: 1.5rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
-  padding: 1rem;
+  transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .app-modal-overlay.modal-open {
@@ -137,105 +175,78 @@
 }
 
 .app-modal-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-gold);
+  background: rgba(18, 24, 38, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
   width: 100%;
   max-width: 520px;
-  overflow: hidden;
-  transform: scale(0.92);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transform: scale(0.95) translateY(10px);
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .app-modal-overlay.modal-open .app-modal-card {
-  transform: scale(1);
+  transform: scale(1) translateY(0);
 }
 
 .modal-header {
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .modal-title {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: var(--gold-bright);
 }
 
 .modal-close-btn {
   background: none;
   border: none;
+  font-size: 1.6rem;
   color: var(--text-muted);
-  font-size: 1.5rem;
   cursor: pointer;
   line-height: 1;
+  transition: color 0.2s ease;
 }
+
 .modal-close-btn:hover {
-  color: var(--text-primary);
+  color: #fff;
 }
 
 .modal-body {
   padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.form-label {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.form-input, .form-select {
-  padding: 0.75rem 1rem;
-  background: hsl(220, 22%, 9%);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  color: var(--text-primary);
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.form-input:focus, .form-select:focus {
-  border-color: var(--gold-bright);
-  box-shadow: 0 0 8px var(--gold-glow);
-}
-
-.form-hint {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  line-height: 1.4;
 }
 
 .modal-footer {
-  padding: 1rem 1.5rem;
-  border-top: 1px solid var(--border-subtle);
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: flex-end;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
-/* 历史抽屉 */
+/* 4. 液态玻璃抽屉 (Drawer) */
 .history-drawer-panel {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   width: 100%;
-  max-width: 420px;
-  background: var(--bg-surface);
-  border-left: 1px solid var(--border-gold);
-  box-shadow: var(--shadow-lg);
-  z-index: 200;
+  max-width: 440px;
+  background: rgba(14, 19, 30, 0.85);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  z-index: 2000;
   transform: translateX(100%);
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   display: flex;
@@ -248,7 +259,7 @@
 
 .drawer-header {
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -271,18 +282,20 @@
 }
 
 .history-card-item {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  transition: border-color 0.2s ease;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .history-card-item:hover {
-  border-color: var(--gold-main);
+  border-color: rgba(243, 209, 121, 0.4);
+  transform: translateY(-2px);
 }
 
 .history-meta {
@@ -317,54 +330,25 @@
 .h-card-tag {
   font-size: 0.75rem;
   padding: 0.2rem 0.5rem;
-  background: hsla(220, 20%, 20%, 0.8);
-  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
   color: var(--text-secondary);
 }
 
-/* Toast 提示 */
-.app-toast-box {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: hsl(220, 25%, 15%);
-  border: 1px solid var(--gold-bright);
-  color: var(--text-primary);
-  padding: 0.85rem 1.75rem;
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-lg);
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  z-index: 300;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.app-toast-box.toast-show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* 3. 3D 卡牌视觉与翻转系统 */
+/* 5. 3D 翻转卡牌系统 (3D Flip System) */
 .tarot-3d-card-wrapper {
   perspective: 1200px;
   width: 100%;
-  aspect-ratio: 1 / 1.68;
-  max-width: 260px;
-  margin: 0 auto;
-  position: relative;
+  height: 100%;
 }
 
 .tarot-3d-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
+  text-align: center;
+  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
   transform-style: preserve-3d;
-  transition: transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: var(--shadow-md);
-  border-radius: var(--radius-md);
 }
 
 .tarot-3d-card-inner.flipped {
@@ -373,10 +357,10 @@
 
 .tarot-card-face {
   position: absolute;
-  width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: var(--radius-md);
@@ -391,15 +375,16 @@
   transform: rotateY(180deg);
 }
 
-/* 卡牌正面与背面渲染通用 */
+/* 6. 卡牌视觉与液态玻璃折射 */
 .card-visual {
   width: 100%;
   height: 100%;
   position: relative;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-gold);
+  background: #0d1117;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-md);
   overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
 }
 
 .card-img-element {
@@ -417,34 +402,44 @@
   transform: rotate(180deg);
 }
 
-/* 光环与徽章 */
+/* 玻璃高光反光层 */
+.card-aura-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 12px var(--element-glow, var(--gold-glow)), 0 0 14px var(--element-glow, var(--gold-glow));
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
 .card-overlay-badge {
   position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
+  top: 0.5rem;
+  right: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
   align-items: flex-end;
   z-index: 5;
 }
 
 .badge-wuxing {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   padding: 0.15rem 0.45rem;
-  border-radius: var(--radius-sm);
+  border-radius: 4px;
   color: #fff;
   box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
 .badge-orientation {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   padding: 0.1rem 0.35rem;
   background: rgba(0,0,0,0.75);
-  border: 1px solid var(--border-gold);
-  border-radius: var(--radius-sm);
-  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #fff;
 }
 
 .card-bottom-title {
@@ -452,8 +447,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 0.6rem 0.5rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+  padding: 0.5rem;
+  background: linear-gradient(to top, rgba(10, 13, 20, 0.95) 0%, rgba(10, 13, 20, 0.4) 70%, transparent 100%);
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -463,54 +458,43 @@
 
 .card-num-label {
   font-family: var(--font-serif);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--gold-bright);
 }
 
 .card-name-label {
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: #fff;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
 
-.card-aura-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 12px var(--element-glow, var(--gold-glow)), 0 0 14px var(--element-glow, var(--gold-glow));
-  opacity: 0.65;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-/* 程序化水墨卡牌样式 */
+/* 7. 程序化精美复古神秘学卡牌 */
 .card-art-procedural {
-  background: hsl(40, 25%, 90%);
-  color: hsl(220, 30%, 15%);
-  padding: 0.6rem;
+  background: radial-gradient(circle at 50% 40%, #1e2638 0%, #0d121c 100%);
+  color: #fff;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
 }
 
 .procedural-border-frame {
   flex: 1;
-  border: 2px solid hsl(38, 45%, 40%);
+  border: 1px solid rgba(243, 209, 121, 0.4);
   border-radius: var(--radius-sm);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0.6rem;
-  background: 
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, rgba(220, 205, 175, 0.4) 100%);
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .frame-corner {
   position: absolute;
-  font-size: 0.8rem;
-  color: hsl(38, 50%, 35%);
+  font-size: 0.75rem;
+  color: var(--gold-bright);
 }
 .frame-corner.top-left { top: 2px; left: 4px; }
 .frame-corner.top-right { top: 2px; right: 4px; }
@@ -522,13 +506,13 @@
   justify-content: space-between;
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 0.95rem;
-  color: hsl(38, 60%, 25%);
+  font-size: 0.85rem;
+  color: var(--gold-bright);
 }
 
 .procedural-center-art {
   position: relative;
-  height: 120px;
+  height: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -538,21 +522,19 @@
 
 .celestial-ring-outer {
   position: absolute;
-  width: 96px;
-  height: 96px;
+  width: 86px;
+  height: 86px;
   border-radius: 50%;
-  border: 1px dashed hsl(38, 55%, 45%);
+  border: 1px dashed rgba(243, 209, 121, 0.35);
   animation: spinSlow 30s linear infinite;
-  opacity: 0.55;
 }
 
 .celestial-ring-inner {
   position: absolute;
-  width: 78px;
-  height: 78px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
-  border: 1px solid hsl(38, 50%, 55%);
-  opacity: 0.6;
+  border: 1px solid rgba(243, 209, 121, 0.45);
 }
 
 @keyframes spinSlow {
@@ -560,78 +542,62 @@
   to { transform: rotate(360deg); }
 }
 
-.ink-splash-circle {
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(40, 40, 40, 0.15) 0%, rgba(0,0,0,0) 75%);
-  filter: blur(4px);
-}
-
 .ink-center-symbol {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   z-index: 2;
-  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.25));
+  filter: drop-shadow(0 0 10px rgba(243, 209, 121, 0.5));
 }
 
 .proc-archetype-text {
   font-family: var(--font-serif);
-  font-size: 0.72rem;
-  color: hsl(38, 50%, 30%);
+  font-size: 0.68rem;
+  color: var(--gold-bright);
   letter-spacing: 0.05em;
   z-index: 2;
-  text-align: center;
-}
-
-.ink-taiji-watermark {
-  position: absolute;
-  font-size: 5rem;
-  opacity: 0.1;
-  color: #000;
-}
-
-.ink-wuxing-stamp {
-  position: absolute;
-  bottom: 0;
-  right: 10px;
-  width: 26px;
-  height: 26px;
-  border: 1.5px solid;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-serif);
-  font-size: 0.85rem;
-  font-weight: 900;
-  background: rgba(255,255,255,0.7);
 }
 
 .procedural-footer {
   text-align: center;
-  border-top: 1px solid hsl(38, 40%, 65%);
-  padding-top: 0.3rem;
+  border-top: 1px solid rgba(243, 209, 121, 0.25);
+  padding-top: 0.25rem;
 }
 
 .proc-name-cn {
   font-family: var(--font-serif);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: hsl(38, 65%, 22%);
+  color: #fff;
   letter-spacing: 0.1em;
 }
 
 .proc-name-en {
-  font-size: 0.68rem;
-  color: hsl(38, 30%, 45%);
+  font-size: 0.64rem;
+  color: var(--text-muted);
   letter-spacing: 0.05em;
-  text-transform: uppercase;
 }
 
-/* 五行色标类 */
-.wx-木 { color: var(--wx-wood) !important; }
-.wx-火 { color: var(--wx-fire) !important; }
-.wx-土 { color: var(--wx-earth) !important; }
-.wx-金 { color: var(--wx-metal) !important; }
-.wx-水 { color: var(--wx-water) !important; }
+/* 8. Toast 气泡 */
+.app-toast-box {
+  position: fixed;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(14, 19, 30, 0.9);
+  border: 1px solid rgba(243, 209, 121, 0.4);
+  color: var(--text-primary);
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius-full);
+  font-size: 0.92rem;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 20px var(--gold-glow);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3000;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.app-toast-box.toast-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
