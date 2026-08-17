@@ -336,6 +336,49 @@
           </div>
         </div>
 
+        <!-- 4. 天机阁主·多轮交互追问解惑模块 -->
+        <div class="result-chat-section" id="result-chat-section">
+          <div class="chat-section-header">
+            <div class="chat-header-title">
+              <span class="chat-avatar">☯</span>
+              <div>
+                <h3 class="chat-title">天机阁主 · 针对卦象深度追问</h3>
+                <p class="chat-subtitle">对当前解盘有疑问？想问具体时机、逆位化解、人际纠葛？导师将结合你的八字与牌阵继续推演：</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 快捷追问气泡推荐 -->
+          <div class="quick-prompts-bar" id="quick-prompts-bar">
+            <span class="quick-prompt-label">💡 猜你想问：</span>
+            <button type="button" class="btn-quick-prompt" data-prompt="请问我的这几张牌里，最核心的矛盾与隐患是什么？我该如何化解？">⚠️ 核心隐患与化解之法</button>
+            <button type="button" class="btn-quick-prompt" data-prompt="结合我的八字喜用神和当前所坐朝向，接下来什么时间或月份转机最明显？">📅 关键转机出现的时机</button>
+            <button type="button" class="btn-quick-prompt" data-prompt="针对我抽出的牌意，在现实人际与工作行动上我明天开始最该做哪两件事？">🎯 明天开始最该采取的行动</button>
+            <button type="button" class="btn-quick-prompt" data-prompt="我的办公桌/床头除了调整朝向，还能通过什么具体的物件或颜色来加强气场？">🪴 空间风水具体摆设建议</button>
+          </div>
+
+          <!-- 对话消息列表 -->
+          <div class="chat-messages-container" id="chat-messages-container">
+            <div class="chat-message-row msg-sage">
+              <div class="msg-avatar">☯</div>
+              <div class="msg-bubble">
+                <div class="msg-sender">玄学通义导师</div>
+                <div class="msg-text" id="chat-initial-welcome">
+                  卦象已定，气机已明。针对本次占卜的四柱命盘、时空坐向与三才卦象，若有未解之惑或想深究的具体人事细节，请尽管道来，我将为你抽丝剥茧。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 追问输入框 -->
+          <div class="chat-input-row">
+            <textarea id="chat-input-textarea" class="chat-textarea" rows="2" placeholder="在此输入你的具体追问，例如：‘我没完全看懂那张逆位牌代表什么意思？’"></textarea>
+            <button type="button" class="btn-primary btn-chat-send" id="btn-chat-send">
+              <span>发送追问</span> <span>➤</span>
+            </button>
+          </div>
+        </div>
+
         <!-- 底部全局操作 -->
         <div class="result-actions-footer">
           <button type="button" class="btn-secondary" id="btn-copy-reading">

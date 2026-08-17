@@ -505,6 +505,9 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
+    // 初始化多轮追问模块上下文
+    initChatFollowUpSection();
+
     // 切换到通俗解读 Tab
     switchResultTab("simple");
   }
@@ -668,6 +671,28 @@ document.addEventListener("DOMContentLoaded", () => {
       copyReadingSummary();
     });
 
+    // 多轮追问：发送按钮点击
+    document.getElementById("btn-chat-send")?.addEventListener("click", () => {
+      const input = document.getElementById("chat-input-textarea");
+      if (input) handleSendFollowUpQuestion(input.value);
+    });
+
+    // 多轮追问：回车发送（Shift+Enter换行）
+    document.getElementById("chat-input-textarea")?.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        handleSendFollowUpQuestion(e.target.value);
+      }
+    });
+
+    // 快捷推荐问题点击
+    document.querySelectorAll(".btn-quick-prompt").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const promptText = btn.dataset.prompt;
+        if (promptText) handleSendFollowUpQuestion(promptText);
+      });
+    });
+
     // 设置模态框
     DOM.btnOpenSettings?.addEventListener("click", openSettingsModal);
     DOM.btnCloseSettings?.addEventListener("click", closeSettingsModal);
@@ -677,6 +702,154 @@ document.addEventListener("DOMContentLoaded", () => {
     DOM.btnOpenHistory?.addEventListener("click", openHistoryDrawer);
     DOM.btnCloseHistory?.addEventListener("click", closeHistoryDrawer);
     DOM.btnClearHistory?.addEventListener("click", clearHistory);
+  }
+
+  // ==================== 14. 多轮追问解惑交互实现 ====================
+  function initChatFollowUpSection() {
+    const res = AppState.readingResult;
+    if (!res) return;
+
+    // 初始化多轮会话上下文
+    const payload = DeepSeekClient.buildPayload({
+      topic: AppState.topic,
+      baziResult: AppState.baziResult,
+      direction: AppState.direction,
+      drawnCards: AppState.drawnCards
+    });
+
+    AppState.chatMessages = [
+      { role: "system", content: DeepSeekClient.getSystemPrompt() },
+      { role: "user", content: `这是我刚占卜排出的命盘与卦象数据：\n${JSON.stringify(payload, null, 2)}\n请基于此准备为我解答后续追问。` },
+      { role: "assistant", content: `我已经知晓你的命盘与三才卦象（问测【${res.topicName}】，坐向【${res.direction}】，天机断语「${res.overview.keyPhrase}」）。随时可以针对具体细节向我提问。` }
+    ];
+
+    const welcomeEl = document.getElementById("chat-initial-welcome");
+    if (welcomeEl) {
+      welcomeEl.innerHTML = `已为你锁定问测【<strong>${res.topicName}</strong>】的命盘与三才卦象（坐向【<strong>${res.direction}</strong>】）。若有没看懂的牌意、想深究的具体时机、或现实困惑，请随时向我提问：`;
+    }
+
+    const messagesContainer = document.getElementById("chat-messages-container");
+    if (messagesContainer) {
+      // 保留第一条欢迎词，清除旧历史追问
+      const initialRow = messagesContainer.querySelector(".msg-sage");
+      messagesContainer.innerHTML = "";
+      if (initialRow) messagesContainer.appendChild(initialRow);
+    }
+  }
+
+  let isChatResponding = false;
+  async function handleSendFollowUpQuestion(text) {
+    const question = (text || "").trim();
+    if (!question || isChatResponding) return;
+
+    const inputArea = document.getElementById("chat-input-textarea");
+    if (inputArea) inputArea.value = "";
+
+    const messagesContainer = document.getElementById("chat-messages-container");
+    if (!messagesContainer) return;
+
+    // 1. 添加用户消息气泡
+    const userRow = document.createElement("div");
+    userRow.className = "chat-message-row msg-user";
+    userRow.innerHTML = `
+      <div class="msg-avatar">👤</div>
+      <div class="msg-bubble">
+        <div class="msg-sender">你</div>
+        <div class="msg-text">${escapeHtml(question)}</div>
+      </div>
+    `;
+    messagesContainer.appendChild(userRow);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // 2. 添加导师回复占位气泡
+    const sageRow = document.createElement("div");
+    sageRow.className = "chat-message-row msg-sage";
+    sageRow.innerHTML = `
+      <div class="msg-avatar">☯</div>
+      <div class="msg-bubble">
+        <div class="msg-sender">玄学通义导师</div>
+        <div class="msg-text"><span class="streaming-spinner"></span> 导师正在研析卦象推演...</div>
+      </div>
+    `;
+    messagesContainer.appendChild(sageRow);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    const sageTextEl = sageRow.querySelector(".msg-text");
+
+    isChatResponding = true;
+
+    // 3. 判断是否配置了 DeepSeek API Key
+    if (DeepSeekClient.hasKey()) {
+      AppState.chatMessages.push({ role: "user", content: question });
+
+      await DeepSeekClient.streamChat({
+        messages: AppState.chatMessages,
+        onChunk: (chunk, fullText) => {
+          if (sageTextEl) {
+            sageTextEl.innerHTML = DeepSeekClient.renderMarkdown(fullText);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+          }
+        },
+        onDone: (fullText) => {
+          isChatResponding = false;
+          AppState.chatMessages.push({ role: "assistant", content: fullText });
+          if (sageTextEl) {
+            sageTextEl.innerHTML = DeepSeekClient.renderMarkdown(fullText);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+          }
+        },
+        onError: (err) => {
+          isChatResponding = false;
+          if (sageTextEl) {
+            sageTextEl.innerHTML = `<span style="color:var(--cinnabar)">追问连接异常：${err.message}</span>`;
+          }
+        }
+      });
+    } else {
+      // 本地智能综合合成回答
+      setTimeout(() => {
+        const localAnswer = generateLocalContextualAnswer(question, AppState.readingResult, AppState.baziResult);
+        isChatResponding = false;
+        if (sageTextEl) {
+          sageTextEl.innerHTML = `
+            ${DeepSeekClient.renderMarkdown(localAnswer)}
+            <div style="margin-top:0.75rem; padding-top:0.5rem; border-top:1px dashed var(--border-subtle); font-size:0.8rem; color:var(--text-muted);">
+              💡 提示：若想进行更具深度、不限轮次的多轮 AI 自由推演，可点击右上角「秘境设置」填入你的 DeepSeek API Key。
+            </div>
+          `;
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+      }, 700);
+    }
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function generateLocalContextualAnswer(question, res, bazi) {
+    if (!res) return "请先完成一次排盘占卜，导师方能据此推演。";
+    const cards = res.cardReadings;
+    const dominant = res.radar.dominant;
+    const deficient = res.radar.deficient;
+    const focalDir = res.fengshuiGuidance.focalDirection;
+    const dayMaster = bazi ? bazi.dayMaster.name : "自身命元";
+
+    if (question.includes("隐患") || question.includes("矛盾") || question.includes("化解")) {
+      const earthPos = cards[2] || cards[0];
+      return `【卦象隐患与破解之法】\n\n从地位（隐患位）观之，显现为「${earthPos.cardName}·${earthPos.orientation}」（五行属${earthPos.cardWuxing}）。\n\n- **核心症结**：此牌指示你在现实层面可能面临“${earthPos.keywords.slice(0, 2).join("与")}”的潜在阻力。结合时空五行，当前牌局【${dominant}旺${deficient}弱】，容易导致心神不宁或执行受阻。\n- **破局化解**：首要在【${focalDir}】进行环境调理（如配置${res.fengshuiGuidance.recommendedItems}），以${res.fengshuiGuidance.recommendedColor}柔化火气，守住底线方能反客为主。`;
+    }
+
+    if (question.includes("时间") || question.includes("月份") || question.includes("时机") || question.includes("转机")) {
+      return `【关键时机与转机推演】\n\n结合你的日元「${dayMaster}」与当前坐向「${res.direction}」：\n\n- **最佳契机**：五行中【${deficient}气】生旺之时转机最明显。一般在农历【${deficient === '水' ? '冬月/腊月' : deficient === '木' ? '春季二三月' : deficient === '火' ? '夏季四五月' : '四季末月'}】前后气场最为通达。\n- **行动法则**：在转机显现之前，务必按「${res.overview.keyPhrase}」之训，暗中积累实力，勿打无准备之仗。`;
+    }
+
+    if (question.includes("行动") || question.includes("做") || question.includes("建议")) {
+      return `【现实行动指引】\n\n针对当前三才卦象，建议你从以下两点切入：\n\n1. **心念端正**：面对「${cards[1]?.cardName || '当下'}」所指引的局面，摒弃过往的迟疑，明确自身底线。\n2. **空间借力**：${res.fengshuiGuidance.actionAdvice}\n\n内外合一，方能破局。`;
+    }
+
+    return `【导师深度解析】\n\n关于你所问之「${question}」：\n\n纵观你的人位当下「${cards[1]?.cardName}（${cards[1]?.orientation}）」与天位前景「${cards[0]?.cardName}」：事态发展的脉络清晰——外在环境对你的制约正处于关键转变期。以「${dayMaster}」之本性，凡事宜先稳固后方阵地，方能在适当时机顺势而为。`;
   }
 
   // 14. 复制解盘摘要
