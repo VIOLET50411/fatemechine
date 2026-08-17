@@ -114,7 +114,6 @@
           <div class="fan-card-inner">
             ${CardRenderer.renderCardBackHtml()}
           </div>
-          <div class="fan-card-glow-edge"></div>
         `;
 
         // 点击选牌

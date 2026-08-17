@@ -477,9 +477,9 @@
 
 .card-aura-glow {
   position: absolute;
-  inset: -2px;
-  border-radius: var(--radius-md);
-  box-shadow: 0 0 20px var(--element-glow);
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 12px var(--element-glow, var(--gold-glow)), 0 0 14px var(--element-glow, var(--gold-glow));
   opacity: 0.65;
   pointer-events: none;
   transition: opacity 0.3s ease;
