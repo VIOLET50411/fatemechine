@@ -1,0 +1,253 @@
+/* ==========================================================================
+   天机阁 · 全局设计系统与视觉基石 (Design Tokens & Base Reset)
+   新中式水墨 + 神秘学暗色系视觉体系
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
+
+:root {
+  /* 主色调：玄墨与墨青 */
+  --bg-main: hsl(220, 24%, 7%);
+  --bg-surface: hsl(220, 18%, 12%);
+  --bg-surface-elevated: hsl(220, 16%, 17%);
+  --bg-card: hsla(220, 20%, 14%, 0.85);
+  --bg-card-hover: hsla(220, 22%, 18%, 0.95);
+
+  /* 核心强调色：朱砂红与烫金 */
+  --cinnabar: hsl(5, 75%, 52%);
+  --cinnabar-glow: hsla(5, 80%, 55%, 0.4);
+  --gold-main: hsl(42, 75%, 55%);
+  --gold-bright: hsl(45, 90%, 65%);
+  --gold-muted: hsl(40, 45%, 40%);
+  --gold-glow: hsla(42, 85%, 60%, 0.35);
+
+  /* 五行标准配色体系 */
+  --wx-wood: hsl(152, 60%, 45%);       /* 木 · 青翠 */
+  --wx-wood-glow: hsla(152, 60%, 45%, 0.35);
+  --wx-fire: hsl(5, 75%, 52%);         /* 火 · 朱红 */
+  --wx-fire-glow: hsla(5, 75%, 52%, 0.35);
+  --wx-earth: hsl(38, 70%, 50%);       /* 土 · 赭黄 */
+  --wx-earth-glow: hsla(38, 70%, 50%, 0.35);
+  --wx-metal: hsl(45, 40%, 82%);       /* 金 · 月白/金银 */
+  --wx-metal-glow: hsla(45, 40%, 82%, 0.35);
+  --wx-water: hsl(205, 65%, 48%);      /* 水 · 玄青/天青 */
+  --wx-water-glow: hsla(205, 65%, 48%, 0.35);
+
+  /* 文字颜色 */
+  --text-primary: hsl(40, 25%, 92%);
+  --text-secondary: hsl(220, 12%, 70%);
+  --text-muted: hsl(220, 10%, 48%);
+  --text-gold: hsl(44, 80%, 65%);
+
+  /* 边框与阴影 */
+  --border-subtle: hsla(42, 40%, 45%, 0.2);
+  --border-gold: hsla(42, 70%, 55%, 0.45);
+  --border-active: hsla(45, 90%, 65%, 0.85);
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.1);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.2);
+
+  /* 字体家族 */
+  --font-serif: 'Noto Serif SC', 'Songti SC', SimSun, serif;
+  --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* 布局参数 */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+  --header-height: 68px;
+}
+
+/* 基础重置 */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--bg-main);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: 
+    radial-gradient(circle at 50% 0%, hsla(220, 25%, 15%, 0.7) 0%, transparent 60%),
+    radial-gradient(circle at 10% 30%, hsla(5, 75%, 20%, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 90% 70%, hsla(205, 65%, 20%, 0.15) 0%, transparent 50%),
+    var(--bg-main);
+  background-attachment: fixed;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 水墨纹理背景层 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, rgba(212, 175, 55, 0.15), rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0));
+  background-size: 100px 100px;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--gold-bright);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--text-primary);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-muted);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-main);
+}
+
+/* 顶部导航 Header */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background: hsla(220, 24%, 8%, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 100;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.brand-emblem {
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--gold-main);
+  filter: drop-shadow(0 0 8px var(--gold-glow));
+  animation: emblemPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes emblemPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 6px var(--gold-glow)); }
+  100% { transform: scale(1.06); filter: drop-shadow(0 0 12px var(--gold-bright)); }
+}
+
+.brand-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  background: linear-gradient(135deg, var(--gold-bright) 0%, #fff 50%, var(--gold-main) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-left: 0.5rem;
+  border-left: 1px solid var(--border-subtle);
+  padding-left: 0.6rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* 主内容舞台 */
+.app-stage-container {
+  padding-top: calc(var(--header-height) + 1.5rem);
+  padding-bottom: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Section 通用显示/隐藏过渡 */
+.app-step-section {
+  display: none;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.app-step-section.active-section {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 响应式断点 */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 58px;
+  }
+  .brand-subtitle {
+    display: none;
+  }
+  .app-stage-container {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+    padding-top: calc(var(--header-height) + 0.85rem);
+  }
+}

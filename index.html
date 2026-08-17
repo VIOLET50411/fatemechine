@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>天机阁 · 风水八卦与西方塔罗交互占卜</title>
+  <meta name="description" content="天机阁将西方塔罗象征潜意识投射与东方风水五行八卦时空能量深度交融，提供3D翻牌、生辰八字排盘、罗盘方位定位与DeepSeek深度解盘。">
+  <meta name="keywords" content="风水, 塔罗牌, 算命, 八字排盘, 五行生克, 八卦罗盘, DeepSeek占卜, 天机阁">
+
+  <!-- 样式表引用 -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+</head>
+<body>
+
+  <!-- 顶部导航栏 -->
+  <header class="app-header">
+    <div class="header-brand" id="btn-brand-home" onclick="location.reload()">
+      <span class="brand-emblem">☯</span>
+      <span class="brand-title">天机阁</span>
+      <span class="brand-subtitle">风水塔罗 · 气象通义</span>
+    </div>
+
+    <div class="header-actions">
+      <button type="button" class="btn-icon-header" id="btn-open-history" title="查看过往占卜记录">
+        <span>📜</span> 占卜记录
+      </button>
+      <button type="button" class="btn-icon-header" id="btn-open-settings" title="配置 DeepSeek API Key 与牌组">
+        <span>⚙️</span> 秘境设置
+      </button>
+    </div>
+  </header>
+
+  <!-- 主内容舞台 -->
+  <main class="app-stage-container">
+
+    <!-- 阶段 0：首页 Hero -->
+    <section class="app-step-section" id="section-landing">
+      <div class="hero-section-layout">
+        <div class="hero-emblem-wrap">
+          <div class="hero-emblem-circle">☯</div>
+        </div>
+
+        <div class="hero-badge-tag">
+          <span>✦</span> 东西玄学交感 · 时空心象合一 <span>✦</span>
+        </div>
+
+        <h1 class="hero-main-title">参赞天地化育 · 洞悉心象机微</h1>
+        
+        <p class="hero-desc">
+          将西方塔罗的原型潜意识投射，与东方风水五行生克、八卦九宫方位深度融合。
+          依托生辰八字与空间坐向，全流程自由选牌，探索你的专属时空气场。
+        </p>
+
+        <div class="hero-features-row">
+          <div class="feature-pill">
+            <span class="feature-icon">🎴</span>
+            <span>78张水墨国风塔罗</span>
+          </div>
+          <div class="feature-pill">
+            <span class="feature-icon">🧭</span>
+            <span>八卦时空罗盘定向</span>
+          </div>
+          <div class="feature-pill">
+            <span class="feature-icon">⚡</span>
+            <span>四柱八字与五行雷达</span>
+          </div>
+          <div class="feature-pill">
+            <span class="feature-icon">🔮</span>
+            <span>DeepSeek 深度解盘</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary btn-pulse" id="btn-hero-start">
+          <span>起卦推演 · 开启占卜</span> <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 阶段 1：选择占卜主题 -->
+    <section class="app-step-section" id="section-topic">
+      <div class="section-page-header">
+        <div class="page-step-indicator">第 1 步 · 缘起定心</div>
+        <h2 class="page-main-title">请选择你当下的占卜诉求</h2>
+        <p class="page-sub-desc">心诚则灵，心念聚集之处，即是气机生发之时</p>
+      </div>
+
+      <div class="topics-grid-container">
+        <!-- 事业运 -->
+        <div class="topic-select-card" data-topic="career" style="--topic-color: var(--wx-fire); --topic-glow: var(--wx-fire-glow);">
+          <div class="topic-card-icon">🔥</div>
+          <h3 class="topic-card-title">事业功名</h3>
+          <div class="topic-card-element" style="color:var(--wx-fire)">对应方位：正南离火（名望/升腾）</div>
+          <p class="topic-card-desc">求职晋升、跳槽创业、职场人际、项目决断与前景谋划。</p>
+        </div>
+
+        <!-- 感情运 -->
+        <div class="topic-select-card" data-topic="love" style="--topic-color: var(--wx-water); --topic-glow: var(--wx-water-glow);">
+          <div class="topic-card-icon">💧</div>
+          <h3 class="topic-card-title">情感姻缘</h3>
+          <div class="topic-card-element" style="color:var(--wx-water)">对应方位：正北坎水（情感/潜意识）</div>
+          <p class="topic-card-desc">正缘桃花、情感走向、伴侣相处、心结化解与婚姻契机。</p>
+        </div>
+
+        <!-- 财运 -->
+        <div class="topic-select-card" data-topic="wealth" style="--topic-color: var(--gold-bright); --topic-glow: var(--gold-glow);">
+          <div class="topic-card-icon">🪙</div>
+          <h3 class="topic-card-title">财禄丰殖</h3>
+          <div class="topic-card-element" style="color:var(--gold-bright)">对应方位：东北/西南（田宅/财库）</div>
+          <p class="topic-card-desc">正财偏财、投资风向、聚财守库、副业开拓与破财防范。</p>
+        </div>
+
+        <!-- 居所运 -->
+        <div class="topic-select-card" data-topic="home" style="--topic-color: var(--wx-wood); --topic-glow: var(--wx-wood-glow);">
+          <div class="topic-card-icon">🌿</div>
+          <h3 class="topic-card-title">居所宅运</h3>
+          <div class="topic-card-element" style="color:var(--wx-wood)">对应方位：正东/东南（生机/气流）</div>
+          <p class="topic-card-desc">乔迁时机、房屋气场、办公环境布局、化煞调和与家宅安宁。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 阶段 2：输入生辰八字 -->
+    <section class="app-step-section" id="section-bazi">
+      <div class="section-page-header">
+        <div class="page-step-indicator">第 2 步 · 命盘排演</div>
+        <h2 class="page-main-title">输入生辰信息，排出乾坤四柱</h2>
+        <p class="page-sub-desc">系统将自动推演你的本命五行旺衰与喜用神（支持详简随时切换）</p>
+      </div>
+
+      <div class="bazi-layout-grid">
+        <!-- 左侧输入表单 -->
+        <div class="bazi-input-panel">
+          <h3 class="box-title">阳历生辰设定</h3>
+
+          <div class="form-group">
+            <label class="form-label">性别选择</label>
+            <div class="gender-radio-group">
+              <label class="gender-radio-label">
+                <input type="radio" name="birth-gender" value="男" checked> 乾造（男）
+              </label>
+              <label class="gender-radio-label">
+                <input type="radio" name="birth-gender" value="女"> 坤造（女）
+              </label>
+            </div>
+          </div>
+
+          <div class="bazi-select-row">
+            <div class="form-group">
+              <label class="form-label" for="select-birth-year">出生年份</label>
+              <select id="select-birth-year" class="form-select"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="select-birth-month">出生月份</label>
+              <select id="select-birth-month" class="form-select"></select>
+            </div>
+          </div>
+
+          <div class="bazi-select-row">
+            <div class="form-group">
+              <label class="form-label" for="select-birth-day">出生日期</label>
+              <select id="select-birth-day" class="form-select"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="select-birth-hour">出生时段（时辰）</label>
+              <select id="select-birth-hour" class="form-select">
+                <option value="0">23:00-01:00（子时·深夜）</option>
+                <option value="2">01:00-03:00（丑时·凌晨）</option>
+                <option value="4">03:00-05:00（寅时·拂晓）</option>
+                <option value="6">05:00-07:00（卯时·清晨）</option>
+                <option value="8">07:00-09:00（辰时·早晨）</option>
+                <option value="10">09:00-11:00（巳时·上午）</option>
+                <option value="12" selected>11:00-13:00（午时·正午）</option>
+                <option value="14">13:00-15:00（未时·午后）</option>
+                <option value="16">15:00-17:00（申时·下午）</option>
+                <option value="18">17:00-19:00（酉时·傍晚）</option>
+                <option value="20">19:00-21:00（戌时·黄昏）</option>
+                <option value="22">21:00-23:00（亥时·人定）</option>
+                <option value="">不清楚时辰（按三柱推演）</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-hint">
+            💡 提示：如不清楚精确出生时辰，可选择“不清楚时辰”，系统将依据年月日三柱推排五行底色。
+          </div>
+
+          <div class="bazi-action-btns">
+            <button type="button" class="btn-secondary" id="btn-bazi-back">← 返回重选主题</button>
+            <button type="button" class="btn-primary" id="btn-bazi-next">锁定命盘 · 定方位 →</button>
+          </div>
+        </div>
+
+        <!-- 右侧实时命盘卡片 -->
+        <div id="bazi-result-preview"></div>
+      </div>
+    </section>
+
+    <!-- 阶段 3：确定方位（罗盘） -->
+    <section class="app-step-section" id="section-compass">
+      <div class="section-page-header">
+        <div class="page-step-indicator">第 3 步 · 罗盘定局</div>
+        <h2 class="page-main-title">确定你当前的空间朝向</h2>
+        <p class="page-sub-desc">可转动手机启用电子指南针，或直接点击/滑动八卦罗盘定下坐向</p>
+      </div>
+
+      <div class="compass-layout-container" id="compass-interactive-box">
+        <!-- 罗盘视觉区域 -->
+        <div class="compass-visual-area">
+          <div class="compass-dial-outer">
+            <div class="compass-dial">
+              <div class="dial-bagua-labels">
+                <div class="dial-item dir-n">坎北</div>
+                <div class="dial-item dir-ne">艮东北</div>
+                <div class="dial-item dir-e">震东</div>
+                <div class="dial-item dir-se">巽东南</div>
+                <div class="dial-item dir-s">离南</div>
+                <div class="dial-item dir-sw">坤西南</div>
+                <div class="dial-item dir-w">兑西</div>
+                <div class="dial-item dir-nw">乾西北</div>
+              </div>
+            </div>
+
+            <!-- 指针 -->
+            <div class="compass-needle">
+              <div class="needle-north"></div>
+              <div class="needle-south"></div>
+              <div class="needle-pivot"></div>
+            </div>
+
+            <div class="compass-center-taiji">☯</div>
+          </div>
+
+          <div class="compass-sensor-toggle">
+            <button type="button" class="btn-secondary btn-enable-sensor">
+              <span>🧭</span> 启用设备指南针感测
+            </button>
+          </div>
+        </div>
+
+        <!-- 罗盘信息面板 -->
+        <div class="compass-info-panel">
+          <div class="compass-current-badge">
+            <span class="compass-gua-name">离卦</span>
+            <div>
+              <div class="compass-dir-name">正坐朝向 · 南</div>
+              <span class="compass-wuxing-tag wx-火">五行属火</span>
+            </div>
+          </div>
+
+          <p class="compass-desc-text">
+            离火居南，主名望威仪、远景光明与心性热情。在此朝向推演，事业与名誉能量倍增。
+          </p>
+
+          <div class="compass-quick-select">
+            <div class="quick-select-label">快速指定常用朝向：</div>
+            <div class="quick-buttons-grid">
+              <button type="button" class="compass-quick-btn" data-dir="东">正东·震</button>
+              <button type="button" class="compass-quick-btn active" data-dir="南">正南·离</button>
+              <button type="button" class="compass-quick-btn" data-dir="西">正西·兑</button>
+              <button type="button" class="compass-quick-btn" data-dir="北">正北·坎</button>
+              <button type="button" class="compass-quick-btn" data-dir="东南">东南·巽</button>
+              <button type="button" class="compass-quick-btn" data-dir="东北">东北·艮</button>
+              <button type="button" class="compass-quick-btn" data-dir="西南">西南·坤</button>
+              <button type="button" class="compass-quick-btn" data-dir="西北">西北·乾</button>
+            </div>
+          </div>
+
+          <div class="bazi-action-btns">
+            <button type="button" class="btn-secondary" id="btn-compass-back">← 返回八字</button>
+            <button type="button" class="btn-primary" id="btn-compass-next">锁定方位 · 开始洗牌 →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 阶段 4：洗牌过渡动画 -->
+    <section class="app-step-section" id="section-shuffle">
+      <div id="shuffle-animation-container"></div>
+    </section>
+
+    <!-- 阶段 5：扇形自由抽牌 -->
+    <section class="app-step-section" id="section-cards">
+      <div class="section-page-header">
+        <div class="page-step-indicator">第 4 步 · 心感神应</div>
+        <h2 class="page-main-title">请凭第一直觉，抽取三张灵牌</h2>
+        <p class="page-sub-desc">分别定立【天位·前景】、【人位·当下】、【地位·隐患】三才阵位</p>
+      </div>
+
+      <div class="cards-selection-layout">
+        <!-- 扇面选牌池 -->
+        <div class="cards-fan-container" id="cards-fan-container"></div>
+
+        <!-- 底部已选状态栏 -->
+        <div id="cards-selected-bar"></div>
+
+        <div class="cards-action-footer">
+          <button type="button" class="btn-secondary" id="btn-re-shuffle">
+            <span>🔄</span> 重新洗牌
+          </button>
+          <button type="button" class="btn-primary" id="btn-start-spread" disabled>
+            <span>开启三才神煞阵 · 解盘</span> <span>→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 阶段 6：三才阵位落牌与3D翻牌 -->
+    <section class="app-step-section" id="section-spread">
+      <div class="section-page-header">
+        <div class="page-step-indicator">三才归位 · 气机交感</div>
+        <h2 class="page-main-title">八卦阵位正在显象</h2>
+        <p class="page-sub-desc">三才时空气场逐一贯通，正在为你解开天机...</p>
+      </div>
+
+      <div id="spread-altar-container"></div>
+    </section>
+
+    <!-- 阶段 7：综合解盘结果页 -->
+    <section class="app-step-section" id="section-result">
+      <div class="result-report-layout">
+
+        <!-- 结果页 Tab 切换 -->
+        <div class="result-tabs-nav">
+          <button type="button" class="tab-nav-btn active" id="tab-btn-simple">
+            <span>📖</span> 通俗极速解读
+          </button>
+          <button type="button" class="tab-nav-btn" id="tab-btn-deepseek">
+            <span>🔮</span> DeepSeek 深度解盘
+          </button>
+        </div>
+
+        <!-- Tab Panel 1：通俗解读 -->
+        <div class="tab-panel-content active" id="tab-panel-simple">
+          <!-- 1. 总览天机 -->
+          <div class="result-overview-box" id="result-overview-box"></div>
+
+          <!-- 2. 雷达图与风水调理 -->
+          <div class="result-radar-grid-row">
+            <div id="result-radar-box"></div>
+            <div id="result-fengshui-box"></div>
+          </div>
+
+          <!-- 3. 三才阵位逐牌详析 -->
+          <div>
+            <div class="section-page-header" style="text-align:left; margin-bottom:1.5rem;">
+              <h3 class="box-title" style="font-size:1.5rem;">三才阵位 · 牌象与五行互参</h3>
+              <p class="page-sub-desc">每一张牌代表时空中的一个面向，结合方位与五行生克直白剖析</p>
+            </div>
+            <div class="result-cards-detail-list" id="result-cards-grid"></div>
+          </div>
+        </div>
+
+        <!-- Tab Panel 2：DeepSeek 深度解盘 -->
+        <div class="tab-panel-content" id="tab-panel-deepseek">
+          <div class="deepseek-stream-box">
+            <div class="deepseek-stream-status" id="deepseek-stream-status" style="display:none;"></div>
+            <div id="deepseek-stream-output"></div>
+          </div>
+        </div>
+
+        <!-- 底部全局操作 -->
+        <div class="result-actions-footer">
+          <button type="button" class="btn-secondary" id="btn-copy-reading">
+            <span>📋</span> 复制解盘摘要
+          </button>
+          <button type="button" class="btn-primary" id="btn-restart-divination">
+            <span>🔄</span> 重新开启一次占卜
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 秘境设置模态框 (Settings Modal) -->
+  <div class="app-modal-overlay" id="settings-modal">
+    <div class="app-modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">⚙️ 秘境与大模型设置</h3>
+        <button type="button" class="modal-close-btn" id="btn-close-settings">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="input-deepseek-key">DeepSeek API Key</label>
+          <input type="password" id="input-deepseek-key" class="form-input" placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx" />
+          <span class="form-hint">仅保存在您本地浏览器的 localStorage 中，绝不上传至任何中间服务器。</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-deepseek-endpoint">API 接口地址（Endpoint）</label>
+          <input type="text" id="input-deepseek-endpoint" class="form-input" value="https://api.deepseek.com/chat/completions" />
+          <span class="form-hint">支持官方接口或兼容 OpenAI 格式的反向代理服务。</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-deepseek-model">模型名称（Model）</label>
+          <input type="text" id="input-deepseek-model" class="form-input" value="deepseek-chat" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="select-deck-mode">抽牌牌组模式</label>
+          <select id="select-deck-mode" class="form-select">
+            <option value="major" selected>22张大阿卡纳（经典聚力·推荐）</option>
+            <option value="full">78张全牌组（大阿卡纳+四大元素小牌）</option>
+          </select>
+          <span class="form-hint">可随时在22张大阿卡纳与78张全副塔罗牌之间切换。</span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-primary" id="btn-save-settings">保存设置</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 占卜历史抽屉 (History Drawer) -->
+  <div class="history-drawer-panel" id="history-drawer">
+    <div class="drawer-header">
+      <h3 class="modal-title">📜 历次占卜记录</h3>
+      <button type="button" class="modal-close-btn" id="btn-close-history">&times;</button>
+    </div>
+    <div class="drawer-body" id="history-items-list"></div>
+    <div class="modal-footer">
+      <button type="button" class="btn-secondary" id="btn-clear-history">清空记录</button>
+    </div>
+  </div>
+
+  <!-- 全局 Toast 提示 -->
+  <div class="app-toast-box" id="app-toast"></div>
+
+  <!-- 核心逻辑脚本引入 -->
+  <script src="js/tarot-data.js"></script>
+  <script src="js/bazi-engine.js"></script>
+  <script src="js/fengshui-engine.js"></script>
+  <script src="js/reading-engine.js"></script>
+  <script src="js/deepseek-client.js"></script>
+  <script src="js/card-renderer.js"></script>
+  <script src="js/compass.js"></script>
+  <script src="js/card-interaction.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
