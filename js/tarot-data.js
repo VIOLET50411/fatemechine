@@ -99,7 +99,7 @@ const TAROT_DATA = [
     wuxing: "土",
     baguaGua: "坤",
     baguaDirection: "西南",
-    image: null,
+    image: "assets/cards/major_3.jpg",
     upright: {
       keywords: ["厚德载物", "丰收丰盛", "滋养繁衍", "和顺包容"],
       general: "坤土博厚，孕育万物。象征极度富足的生命力、物质回报与温润的滋养能量。",
@@ -491,7 +491,7 @@ const TAROT_DATA = [
     wuxing: "木",
     baguaGua: "巽",
     baguaDirection: "东南",
-    image: null,
+    image: "assets/cards/major_17.jpg",
     upright: {
       keywords: ["希望之光", "灵感如泉", "抚平创伤", "天赐祥瑞"],
       general: "风清月朗，星汉灿烂。风暴过后的宁静与治愈，点燃心中不灭的希望之灯。",
@@ -519,7 +519,7 @@ const TAROT_DATA = [
     wuxing: "水",
     baguaGua: "坎",
     baguaDirection: "正北",
-    image: null,
+    image: "assets/cards/major_18.jpg",
     upright: {
       keywords: ["潜流暗涌", "迷雾重重", "直面恐惧", "照见心魔"],
       general: "月隐于云，夜路幽深。面对未知的不安与内心的疑虑，需谨防被表象与谣言所误导。",
@@ -603,7 +603,7 @@ const TAROT_DATA = [
     wuxing: "土",
     baguaGua: "坤",
     baguaDirection: "西南",
-    image: null,
+    image: "assets/cards/major_21.jpg",
     upright: {
       keywords: ["圆融圆满", "功德圆成", "环宇通达", "新元肇始"],
       general: "四象环护，周而复始。一段重大周期的完美收官，身心达到最高维度的和谐与自由。",

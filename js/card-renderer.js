@@ -43,7 +43,7 @@
     }
 
     /**
-     * 程序化生成水墨国风牌面
+     * 程序化生成精美复古神秘学牌面
      */
     static generateProceduralCardHtml(card, isReversed, extraClasses, wuxingColor) {
       const reversedClass = isReversed ? "is-reversed" : "";
@@ -54,27 +54,35 @@
         "pentacles": "🪙"
       };
 
-      const suitSymbol = card.suit ? (suitIcons[card.suit] || "☯") : "☯";
+      const suitLabels = {
+        "wands": "Wands · 权杖",
+        "cups": "Cups · 圣杯",
+        "swords": "Swords · 宝剑",
+        "pentacles": "Pentacles · 星币"
+      };
+
+      const centerIcon = card.suit ? (suitIcons[card.suit] || "✦") : "★";
+      const subLabel = card.suit ? (suitLabels[card.suit] || card.nameEn) : card.nameEn;
 
       return `
         <div class="card-visual card-art-procedural ${reversedClass} ${extraClasses}" style="--element-glow: ${wuxingColor}">
           <div class="procedural-parchment-bg"></div>
           <div class="procedural-border-frame">
-            <div class="frame-corner top-left">☰</div>
-            <div class="frame-corner top-right">☷</div>
-            <div class="frame-corner bottom-left">☵</div>
-            <div class="frame-corner bottom-right">☲</div>
+            <div class="frame-corner top-left">✦</div>
+            <div class="frame-corner top-right">✦</div>
+            <div class="frame-corner bottom-left">✦</div>
+            <div class="frame-corner bottom-right">✦</div>
             
             <div class="procedural-header">
               <div class="proc-number">${card.number}</div>
-              <div class="proc-gua">${card.baguaGua ? card.baguaGua + "卦" : ""}</div>
+              <div class="proc-gua">${card.element ? card.element + '元素' : ''}</div>
             </div>
 
             <div class="procedural-center-art">
-              <div class="ink-splash-circle"></div>
-              <div class="ink-center-symbol">${suitSymbol}</div>
-              <div class="ink-taiji-watermark">☯</div>
-              <div class="ink-wuxing-stamp" style="border-color:${wuxingColor}; color:${wuxingColor};">${card.wuxing}</div>
+              <div class="celestial-ring-outer"></div>
+              <div class="celestial-ring-inner"></div>
+              <div class="ink-center-symbol">${centerIcon}</div>
+              <div class="proc-archetype-text">${subLabel}</div>
             </div>
 
             <div class="procedural-footer">
