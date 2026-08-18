@@ -993,13 +993,18 @@
 
 .overview-keyphrase {
   font-family: var(--font-serif);
-  font-size: 2.2rem;
-  font-weight: 900;
-  letter-spacing: 0.1em;
+  font-size: clamp(1.2rem, 5vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
   background: linear-gradient(180deg, #ffffff 0%, #f3d179 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
+  margin: 0 auto 1.1rem;
+  max-width: 100%;
+  word-break: keep-all;
+  text-align: center;
+  display: block;
 }
 
 .overview-summary-text {
@@ -1548,8 +1553,15 @@
   .card-mini-thumb {
     margin: 0 auto;
   }
+  .result-overview-box {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1.5rem;
+  }
   .overview-keyphrase {
-    font-size: 1.6rem;
+    font-size: clamp(1.1rem, 4.8vw, 1.42rem);
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    padding: 0 0.2rem;
   }
   .result-chat-section {
     padding: 1.25rem 1rem;

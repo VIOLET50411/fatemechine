@@ -440,10 +440,10 @@ document.addEventListener("DOMContentLoaded", () => {
       overviewEl.innerHTML = `
         <div class="overview-header-tag">
           <span class="tag-topic">问事：${res.topicName}</span>
-          <span class="tag-facing">坐向：${res.direction}（${res.baguaInfo.gua}卦·五行${res.baguaInfo.wuxing}）</span>
+          <span class="tag-facing">坐向：${res.direction} · ${res.baguaInfo.gua}卦 · 五行属${res.baguaInfo.wuxing}</span>
           <span class="tag-time">${res.timestamp}</span>
         </div>
-        <div class="overview-keyphrase">「 ${res.overview.keyPhrase} 」</div>
+        <div class="overview-keyphrase">「${res.overview.keyPhrase}」</div>
         <div class="overview-summary-text">${res.overview.summaryText}</div>
       `;
     }
