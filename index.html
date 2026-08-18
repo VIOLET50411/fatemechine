@@ -17,14 +17,13 @@
   <!-- 顶部导航栏 -->
   <header class="app-header">
     <div class="header-actions">
-      <button type="button" class="btn-icon-header" id="btn-toggle-theme" title="切换深色/浅色模式">
-        <span id="theme-btn-icon">🌙</span> <span id="theme-btn-text">深色模式</span>
+      <button type="button" class="btn-ios-glass" id="btn-open-history" title="查看过往占卜记录">
+        <span class="ios-btn-icon">📜</span>
+        <span class="ios-btn-text">占卜记录</span>
       </button>
-      <button type="button" class="btn-icon-header" id="btn-open-history" title="查看过往占卜记录">
-        <span>📜</span> 占卜记录
-      </button>
-      <button type="button" class="btn-icon-header" id="btn-open-settings" title="配置 DeepSeek API Key 与牌组">
-        <span>⚙️</span> 设置
+      <button type="button" class="btn-ios-glass" id="btn-open-settings" title="配置与外观设置">
+        <span class="ios-btn-icon">⚙️</span>
+        <span class="ios-btn-text">设置</span>
       </button>
     </div>
   </header>
@@ -473,44 +472,120 @@
 
   </main>
 
-  <!-- 秘境设置模态框 (Settings Modal) -->
+  <!-- iOS 风格设置模态框 (iOS Settings Sheet) -->
   <div class="app-modal-overlay" id="settings-modal">
-    <div class="app-modal-card">
-      <div class="modal-header">
-        <h3 class="modal-title">⚙️ 秘境与大模型设置</h3>
-        <button type="button" class="modal-close-btn" id="btn-close-settings">&times;</button>
+    <div class="ios-settings-sheet">
+      <!-- 顶部标题与关闭按钮 -->
+      <div class="ios-modal-header">
+        <h3 class="ios-modal-title">设置</h3>
+        <button type="button" class="ios-close-circle-btn" id="btn-close-settings" aria-label="关闭">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </button>
       </div>
 
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label" for="input-deepseek-key">DeepSeek API Key</label>
-          <input type="password" id="input-deepseek-key" class="form-input" placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx" />
-          <span class="form-hint">仅保存在您本地浏览器的 localStorage 中，绝不上传至任何中间服务器。</span>
+      <div class="ios-settings-content">
+        <!-- 分组 1：主题与外观 -->
+        <div class="ios-section-group">
+          <div class="ios-group-title">主题</div>
+          <div class="ios-group-card">
+            <div class="ios-row-item">
+              <div class="ios-row-left">
+                <span class="ios-row-icon">☀️</span>
+                <span class="ios-row-label">外观</span>
+              </div>
+              <div class="ios-row-right">
+                <select id="select-theme-mode" class="ios-inline-select">
+                  <option value="dark">深色模式</option>
+                  <option value="light">浅色模式</option>
+                </select>
+                <span class="ios-chevron-select">⬍</span>
+              </div>
+            </div>
+
+            <div class="ios-row-item">
+              <div class="ios-row-left">
+                <span class="ios-row-icon">🎴</span>
+                <span class="ios-row-label">牌组</span>
+              </div>
+              <div class="ios-row-right">
+                <select id="select-deck-mode" class="ios-inline-select">
+                  <option value="major" selected>22张 大阿卡纳</option>
+                  <option value="full">78张 全牌组</option>
+                </select>
+                <span class="ios-chevron-select">⬍</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label" for="input-deepseek-endpoint">API 接口地址（Endpoint）</label>
-          <input type="text" id="input-deepseek-endpoint" class="form-input" value="https://api.deepseek.com/chat/completions" />
-          <span class="form-hint">支持官方接口或兼容 OpenAI 格式的反向代理服务。</span>
+        <!-- 分组 2：DeepSeek AI 引擎 -->
+        <div class="ios-section-group">
+          <div class="ios-group-title">DeepSeek AI 引擎</div>
+          <div class="ios-group-card">
+            <div class="ios-row-item">
+              <div class="ios-row-left">
+                <span class="ios-row-icon">🔑</span>
+                <span class="ios-row-label">API 密钥</span>
+              </div>
+              <div class="ios-row-right" style="flex: 1; max-width: 62%;">
+                <input type="password" id="input-deepseek-key" class="ios-inline-input" placeholder="输入 Key (本地储存)" />
+              </div>
+            </div>
+
+            <div class="ios-row-item">
+              <div class="ios-row-left">
+                <span class="ios-row-icon">🌐</span>
+                <span class="ios-row-label">接口地址</span>
+              </div>
+              <div class="ios-row-right" style="flex: 1; max-width: 62%;">
+                <input type="text" id="input-deepseek-endpoint" class="ios-inline-input" value="https://api.deepseek.com/chat/completions" />
+              </div>
+            </div>
+
+            <div class="ios-row-item">
+              <div class="ios-row-left">
+                <span class="ios-row-icon">🧠</span>
+                <span class="ios-row-label">模型</span>
+              </div>
+              <div class="ios-row-right">
+                <input type="text" id="input-deepseek-model" class="ios-inline-input" value="deepseek-chat" style="text-align: right; width: 120px;" />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label" for="input-deepseek-model">模型名称（Model）</label>
-          <input type="text" id="input-deepseek-model" class="form-input" value="deepseek-chat" />
+        <!-- 分组 3：应用与数据 -->
+        <div class="ios-section-group">
+          <div class="ios-group-title">数据与记录</div>
+          <div class="ios-group-card">
+            <div class="ios-row-item clickable" id="btn-settings-open-history">
+              <div class="ios-row-left">
+                <span class="ios-row-icon">📜</span>
+                <span class="ios-row-label">查看占卜记录</span>
+              </div>
+              <div class="ios-row-right">
+                <span class="ios-chevron">›</span>
+              </div>
+            </div>
+
+            <div class="ios-row-item clickable" id="btn-clear-history-settings">
+              <div class="ios-row-left">
+                <span class="ios-row-icon">🗑️</span>
+                <span class="ios-row-label" style="color: #ff3b30;">清空占卜历史</span>
+              </div>
+              <div class="ios-row-right">
+                <span class="ios-chevron">›</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label" for="select-deck-mode">抽牌牌组模式</label>
-          <select id="select-deck-mode" class="form-select">
-            <option value="major" selected>22张大阿卡纳（经典聚力·推荐）</option>
-            <option value="full">78张全牌组（大阿卡纳+四大元素小牌）</option>
-          </select>
-          <span class="form-hint">可随时在22张大阿卡纳与78张全副塔罗牌之间切换。</span>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn-primary" id="btn-save-settings">保存设置</button>
+        <!-- 保存/完成 按钮 -->
+        <button type="button" class="btn-ios-done" id="btn-save-settings">
+          完成
+        </button>
       </div>
     </div>
   </div>

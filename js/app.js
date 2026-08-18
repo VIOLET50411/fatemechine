@@ -74,27 +74,14 @@ document.addEventListener("DOMContentLoaded", () => {
     setTheme(savedTheme);
   }
 
-  function toggleTheme() {
-    const newTheme = AppState.theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    showToast(newTheme === "light" ? "已切换至浅色模式" : "已切换至深色模式");
-  }
-
   function setTheme(theme) {
     AppState.theme = theme;
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("tianji_theme", theme);
 
-    const btnText = document.getElementById("theme-btn-text");
-    const btnIcon = document.getElementById("theme-btn-icon");
-    if (btnText && btnIcon) {
-      if (theme === "light") {
-        btnIcon.textContent = "☀️";
-        btnText.textContent = "浅色模式";
-      } else {
-        btnIcon.textContent = "🌙";
-        btnText.textContent = "深色模式";
-      }
+    const themeSelect = document.getElementById("select-theme-mode");
+    if (themeSelect && themeSelect.value !== theme) {
+      themeSelect.value = theme;
     }
   }
 
@@ -107,11 +94,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const endpointInput = document.getElementById("input-deepseek-endpoint");
     const modelInput = document.getElementById("input-deepseek-model");
     const deckSelect = document.getElementById("select-deck-mode");
+    const themeSelect = document.getElementById("select-theme-mode");
 
     if (keyInput) keyInput.value = DeepSeekClient.getApiKey();
     if (endpointInput) endpointInput.value = DeepSeekClient.getEndpoint();
     if (modelInput) modelInput.value = DeepSeekClient.getModel();
     if (deckSelect) deckSelect.value = AppState.deckMode;
+    if (themeSelect) themeSelect.value = AppState.theme;
   }
 
   function loadHistory() {
@@ -637,9 +626,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 13. 事件监听器绑定
   function initEventListeners() {
-    // 切换主题按钮
-    DOM.btnToggleTheme?.addEventListener("click", toggleTheme);
-
     // 首页开始按钮
     document.getElementById("btn-hero-start")?.addEventListener("click", () => {
       navigateToStep("topic");
@@ -672,39 +658,38 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // 八字确定并下一步
+    // 八字输入下一步与上一步
     document.getElementById("btn-bazi-next")?.addEventListener("click", () => {
+      updateBaziPreview();
       navigateToStep("compass");
     });
-
-    // 八字返回上一步
     document.getElementById("btn-bazi-back")?.addEventListener("click", () => {
       navigateToStep("topic");
     });
 
-    // 罗盘确定并进入洗牌
+    // 罗盘下一步与上一步
     document.getElementById("btn-compass-next")?.addEventListener("click", () => {
       navigateToStep("shuffle");
+      startShuffleAnimation();
     });
-
-    // 罗盘返回上一步
     document.getElementById("btn-compass-back")?.addEventListener("click", () => {
       navigateToStep("bazi");
     });
 
-    // 选牌开始解盘
+    // 开启三才阵
     document.getElementById("btn-start-spread")?.addEventListener("click", () => {
-      if (AppState.drawnCards.length === 3) {
-        navigateToStep("spread");
-      }
+      if (AppState.drawnCards.length < 3) return;
+      navigateToStep("spread");
+      renderSpreadAltar();
     });
 
-    // 选牌重新洗牌
+    // 重新洗牌
     document.getElementById("btn-re-shuffle")?.addEventListener("click", () => {
-      navigateToStep("shuffle");
+      AppState.drawnCards = [];
+      initFanCards();
     });
 
-    // 结果页 Tab 切换
+    // 结果页 Tab
     document.getElementById("tab-btn-simple")?.addEventListener("click", () => {
       switchResultTab("simple");
     });
@@ -715,15 +700,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // 重新占卜
     document.getElementById("btn-restart-divination")?.addEventListener("click", () => {
       AppState.drawnCards = [];
-      navigateToStep("topic");
+      AppState.readingResult = null;
+      AppState.chatMessages = [];
+      navigateToStep("landing");
     });
 
-    // 复制解盘摘要
+    // 复制解盘
     document.getElementById("btn-copy-reading")?.addEventListener("click", () => {
       copyReadingSummary();
     });
 
-    // 多轮追问：发送按钮点击
+    // 发送追问
     document.getElementById("btn-chat-send")?.addEventListener("click", () => {
       const input = document.getElementById("chat-input-textarea");
       if (input) handleSendFollowUpQuestion(input.value);
@@ -749,6 +736,21 @@ document.addEventListener("DOMContentLoaded", () => {
     DOM.btnOpenSettings?.addEventListener("click", openSettingsModal);
     DOM.btnCloseSettings?.addEventListener("click", closeSettingsModal);
     DOM.btnSaveSettings?.addEventListener("click", saveSettingsModal);
+
+    // 设置中的主题切换
+    document.getElementById("select-theme-mode")?.addEventListener("change", (e) => {
+      setTheme(e.target.value);
+      showToast(e.target.value === "light" ? "已切换至浅色模式" : "已切换至深色模式");
+    });
+
+    // 设置中快捷打开历史
+    document.getElementById("btn-settings-open-history")?.addEventListener("click", () => {
+      closeSettingsModal();
+      openHistoryDrawer();
+    });
+
+    // 设置中清空历史
+    document.getElementById("btn-clear-history-settings")?.addEventListener("click", clearHistory);
 
     // 历史抽屉
     DOM.btnOpenHistory?.addEventListener("click", openHistoryDrawer);
@@ -954,12 +956,17 @@ ${cardsText}
     const endpoint = document.getElementById("input-deepseek-endpoint")?.value || "";
     const model = document.getElementById("input-deepseek-model")?.value || "";
     const deck = document.getElementById("select-deck-mode")?.value || "major";
+    const theme = document.getElementById("select-theme-mode")?.value || "dark";
 
     DeepSeekClient.setApiKey(key);
     DeepSeekClient.setEndpoint(endpoint);
     DeepSeekClient.setModel(model);
     AppState.deckMode = deck;
     localStorage.setItem("tianji_deck_mode", deck);
+
+    if (theme !== AppState.theme) {
+      setTheme(theme);
+    }
 
     closeSettingsModal();
     showToast("设置已保存！");
