@@ -7,7 +7,8 @@
   animation: fadeInStep 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-.app-step-section.active-step {
+.app-step-section.active-step,
+.app-step-section.active-section {
   display: block;
 }
 

@@ -309,12 +309,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 隐藏所有 section
     const allSections = document.querySelectorAll(".app-step-section");
-    allSections.forEach(sec => sec.classList.remove("active-section"));
+    allSections.forEach(sec => {
+      sec.classList.remove("active-step", "active-section");
+    });
 
     // 显示目标 section
     const targetSection = document.getElementById(`section-${stepName}`);
     if (targetSection) {
-      targetSection.classList.add("active-section");
+      targetSection.classList.add("active-step", "active-section");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
