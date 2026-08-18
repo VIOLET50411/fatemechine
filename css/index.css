@@ -1,17 +1,16 @@
 /* ==========================================================================
-   天机阁 · 全局液态玻璃与极简东方神秘学设计系统 (Liquid Glass Design System)
+   天机阁 · 全局深浅双色液态玻璃设计系统 (Liquid Glass Dark & Light Themes)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
 
 :root {
-  /* 主基调：深邃曜石与液态玻璃 */
+  /* 默认深色主题：深邃曜石与液态金光 */
   --bg-main: #0a0d14;
   --bg-surface: rgba(18, 24, 36, 0.6);
   --bg-card: rgba(20, 27, 40, 0.52);
   --bg-card-hover: rgba(28, 38, 56, 0.68);
 
-  /* 液态玻璃核心 Token (Glassmorphism) */
   --glass-blur: blur(28px) saturate(190%);
   --glass-border: 1px solid rgba(255, 255, 255, 0.1);
   --glass-border-gold: 1px solid rgba(212, 175, 55, 0.35);
@@ -19,7 +18,6 @@
   --glass-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.16);
   --glass-card-shadow: 0 12px 32px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 
-  /* 核心高光色：流金与朱砂 */
   --gold-main: #d4af37;
   --gold-bright: #f3d179;
   --gold-muted: #8c732b;
@@ -27,7 +25,6 @@
   --cinnabar: #e04a3f;
   --cinnabar-glow: rgba(224, 74, 63, 0.35);
 
-  /* 五行标准配色体系 */
   --wx-wood: #2ecc71;
   --wx-wood-glow: rgba(46, 204, 113, 0.3);
   --wx-fire: #e74c3c;
@@ -39,22 +36,57 @@
   --wx-water: #3498db;
   --wx-water-glow: rgba(52, 152, 219, 0.3);
 
-  /* 文字体系 */
   --text-primary: #f5f6fa;
   --text-secondary: #a4b0be;
   --text-muted: #636e72;
   --text-gold: #f3d179;
 
-  /* 字体家族 */
   --font-serif: 'Noto Serif SC', 'Songti SC', SimSun, serif;
   --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* 圆角与尺寸 */
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 22px;
   --radius-full: 9999px;
   --header-height: 72px;
+}
+
+/* ==================== 浅色主题 (Light Theme: 清雅素白 · 暖玉流金) ==================== */
+[data-theme="light"] {
+  --bg-main: #f5f6fa;
+  --bg-surface: rgba(255, 255, 255, 0.78);
+  --bg-card: rgba(255, 255, 255, 0.68);
+  --bg-card-hover: rgba(255, 255, 255, 0.88);
+
+  --glass-blur: blur(24px) saturate(160%);
+  --glass-border: 1px solid rgba(0, 0, 0, 0.08);
+  --glass-border-gold: 1px solid rgba(184, 134, 11, 0.35);
+  --glass-border-highlight: 1px solid rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 16px 36px rgba(160, 175, 195, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  --glass-card-shadow: 0 10px 28px rgba(160, 175, 195, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  --gold-main: #b8860b;
+  --gold-bright: #9e6f00;
+  --gold-muted: #806010;
+  --gold-glow: rgba(184, 134, 11, 0.22);
+  --cinnabar: #c0392b;
+  --cinnabar-glow: rgba(192, 57, 43, 0.25);
+
+  --wx-wood: #27ae60;
+  --wx-wood-glow: rgba(39, 174, 96, 0.2);
+  --wx-fire: #d35400;
+  --wx-fire-glow: rgba(211, 84, 0, 0.2);
+  --wx-earth: #b37400;
+  --wx-earth-glow: rgba(179, 116, 0, 0.2);
+  --wx-metal: #7f8c8d;
+  --wx-metal-glow: rgba(127, 140, 141, 0.2);
+  --wx-water: #2980b9;
+  --wx-water-glow: rgba(41, 128, 185, 0.2);
+
+  --text-primary: #1e272e;
+  --text-secondary: #485460;
+  --text-muted: #808e9b;
+  --text-gold: #9e6f00;
 }
 
 /* 基础重置 */
@@ -74,16 +106,24 @@ html {
 body {
   font-family: var(--font-sans);
   color: var(--text-primary);
-  background: 
+  background-color: var(--bg-main);
+  background-image: 
     radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 15% 35%, rgba(52, 152, 219, 0.08) 0%, transparent 45%),
-    radial-gradient(circle at 85% 65%, rgba(231, 76, 60, 0.06) 0%, transparent 45%),
-    #0a0d14;
+    radial-gradient(circle at 85% 65%, rgba(231, 76, 60, 0.06) 0%, transparent 45%);
   background-attachment: fixed;
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] body {
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 15% 35%, rgba(52, 152, 219, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 85% 65%, rgba(231, 76, 60, 0.06) 0%, transparent 45%);
 }
 
 /* 背景微光晶体颗粒 */
@@ -95,8 +135,8 @@ body::before {
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(1.5px 1.5px at 30px 40px, rgba(243, 209, 121, 0.12), transparent),
-    radial-gradient(1.5px 1.5px at 80px 120px, rgba(255, 255, 255, 0.06), transparent);
+    radial-gradient(1.5px 1.5px at 30px 40px, rgba(243, 209, 121, 0.15), transparent),
+    radial-gradient(1.5px 1.5px at 80px 120px, rgba(255, 255, 255, 0.08), transparent);
   background-size: 140px 140px;
   pointer-events: none;
   opacity: 0.7;
@@ -134,7 +174,7 @@ button, input, select, textarea {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(120, 120, 120, 0.2);
   border-radius: 3px;
   backdrop-filter: blur(10px);
 }
@@ -149,16 +189,23 @@ button, input, select, textarea {
   left: 0;
   right: 0;
   height: var(--header-height);
-  background: rgba(10, 13, 20, 0.68);
+  background: rgba(10, 13, 20, 0.72);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="light"] .app-header {
+  background: rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .header-brand {
@@ -187,16 +234,14 @@ button, input, select, textarea {
   font-size: 1.35rem;
   font-weight: 900;
   letter-spacing: 0.15em;
-  background: linear-gradient(180deg, #ffffff 20%, #dcdde1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-primary);
 }
 
 .brand-subtitle {
   font-size: 0.78rem;
   color: var(--text-muted);
   letter-spacing: 0.08em;
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(120, 120, 120, 0.2);
   padding-left: 0.75rem;
   margin-left: 0.25rem;
 }
@@ -204,12 +249,12 @@ button, input, select, textarea {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
 .btn-icon-header {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text-secondary);
   padding: 0.45rem 0.95rem;
   border-radius: var(--radius-full);
@@ -223,12 +268,17 @@ button, input, select, textarea {
   transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+[data-theme="light"] .btn-icon-header {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text-secondary);
+}
+
 .btn-icon-header:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(243, 209, 121, 0.4);
+  background: rgba(243, 209, 121, 0.15);
+  border-color: rgba(243, 209, 121, 0.5);
   color: var(--gold-bright);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
 /* 主舞台容器 */

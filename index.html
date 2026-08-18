@@ -23,6 +23,9 @@
     </div>
 
     <div class="header-actions">
+      <button type="button" class="btn-icon-header" id="btn-toggle-theme" title="切换深色/浅色液态玻璃主题">
+        <span id="theme-btn-icon">☀️</span> <span id="theme-btn-text">清雅素白</span>
+      </button>
       <button type="button" class="btn-icon-header" id="btn-open-history" title="查看过往占卜记录">
         <span>📜</span> 占卜记录
       </button>
@@ -36,7 +39,7 @@
   <main class="app-stage-container">
 
     <!-- 阶段 0：首页 Hero -->
-    <section class="app-step-section" id="section-landing">
+    <section class="app-step-section active-step" id="section-landing">
       <div class="hero-section-layout">
         <div class="hero-emblem-wrap">
           <div class="hero-emblem-circle">☯</div>
@@ -47,9 +50,37 @@
         </div>
 
         <h1 class="hero-main-title">参赞天地化育 · 洞悉心象机微</h1>
+        
+        <p class="hero-subtitle-tagline">
+          以东方风水定位时空气场 · 以西方塔罗映射心象机微
+        </p>
 
-        <button type="button" class="btn-primary btn-pulse" id="btn-hero-start" style="margin-top: 2rem;">
-          <span>起卦推演 · 开启占卜</span> <span>→</span>
+        <!-- 快速起卦入口 -->
+        <div class="hero-quick-portals">
+          <div class="quick-portal-item" data-topic="career">
+            <span class="portal-icon">🔥</span>
+            <span class="portal-title">事业功名</span>
+            <span class="portal-desc">离火升腾 · 职场前程</span>
+          </div>
+          <div class="quick-portal-item" data-topic="love">
+            <span class="portal-icon">💧</span>
+            <span class="portal-title">情感姻缘</span>
+            <span class="portal-desc">坎水流芳 · 正缘相契</span>
+          </div>
+          <div class="quick-portal-item" data-topic="wealth">
+            <span class="portal-icon">🪙</span>
+            <span class="portal-title">财禄丰殖</span>
+            <span class="portal-desc">坤土纳宝 · 聚财守库</span>
+          </div>
+          <div class="quick-portal-item" data-topic="home">
+            <span class="portal-icon">🌿</span>
+            <span class="portal-title">居所宅运</span>
+            <span class="portal-desc">震木发轫 · 家宅安宁</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary btn-pulse" id="btn-hero-start" style="margin-top: 2.25rem;">
+          <span>全面推演 · 开启占卜</span> <span>→</span>
         </button>
       </div>
     </section>

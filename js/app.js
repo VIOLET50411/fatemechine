@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
     readingResult: null,
     activeResultTab: "simple", // 'simple' | 'deepseek'
     isBaziDetailed: false,
-    history: []
+    history: [],
+    theme: "dark" // 'dark' | 'light'
   };
 
   // 控制器实例
@@ -48,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sectionResult: document.getElementById("section-result"),
 
     // 常用按钮
+    btnToggleTheme: document.getElementById("btn-toggle-theme"),
     btnOpenSettings: document.getElementById("btn-open-settings"),
     btnCloseSettings: document.getElementById("btn-close-settings"),
     btnSaveSettings: document.getElementById("btn-save-settings"),
@@ -58,11 +60,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 1. 初始化
   function initApp() {
+    initTheme();
     loadSavedSettings();
     loadHistory();
     populateDateSelectors();
     initEventListeners();
     navigateToStep("landing");
+  }
+
+  // 主题控制
+  function initTheme() {
+    const savedTheme = localStorage.getItem("tianji_theme") || "dark";
+    setTheme(savedTheme);
+  }
+
+  function toggleTheme() {
+    const newTheme = AppState.theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    showToast(newTheme === "light" ? "已切换至「清雅素白」主题" : "已切换至「深邃曜石」主题");
+  }
+
+  function setTheme(theme) {
+    AppState.theme = theme;
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("tianji_theme", theme);
+
+    const btnText = document.getElementById("theme-btn-text");
+    const btnIcon = document.getElementById("theme-btn-icon");
+    if (btnText && btnIcon) {
+      if (theme === "light") {
+        btnIcon.textContent = "🌙";
+        btnText.textContent = "深邃曜石";
+      } else {
+        btnIcon.textContent = "☀️";
+        btnText.textContent = "清雅素白";
+      }
+    }
   }
 
   // 2. 加载设置与历史
@@ -602,9 +635,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 13. 事件监听器绑定
   function initEventListeners() {
+    // 切换主题按钮
+    DOM.btnToggleTheme?.addEventListener("click", toggleTheme);
+
     // 首页开始按钮
     document.getElementById("btn-hero-start")?.addEventListener("click", () => {
       navigateToStep("topic");
+    });
+
+    // 首页快速起卦传送门
+    document.querySelectorAll(".quick-portal-item").forEach(item => {
+      item.addEventListener("click", () => {
+        const topic = item.dataset.topic;
+        if (topic) {
+          AppState.topic = topic;
+          document.querySelectorAll(".topic-select-card").forEach(c => {
+            c.classList.toggle("selected", c.dataset.topic === topic);
+          });
+          navigateToStep("bazi");
+        }
+      });
     });
 
     // 主题选择卡片
