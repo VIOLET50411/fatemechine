@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function toggleTheme() {
     const newTheme = AppState.theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
-    showToast(newTheme === "light" ? "已切换至「清雅素白」主题" : "已切换至「深邃曜石」主题");
+    showToast(newTheme === "light" ? "已切换至浅色模式" : "已切换至深色模式");
   }
 
   function setTheme(theme) {
@@ -89,11 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnIcon = document.getElementById("theme-btn-icon");
     if (btnText && btnIcon) {
       if (theme === "light") {
-        btnIcon.textContent = "🌙";
-        btnText.textContent = "深邃曜石";
-      } else {
         btnIcon.textContent = "☀️";
-        btnText.textContent = "清雅素白";
+        btnText.textContent = "浅色模式";
+      } else {
+        btnIcon.textContent = "🌙";
+        btnText.textContent = "深色模式";
       }
     }
   }
