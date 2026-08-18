@@ -589,7 +589,7 @@ document.addEventListener("DOMContentLoaded", () => {
     isDeepSeekStreaming = true;
 
     if (statusContainer) {
-      statusContainer.innerHTML = `<span class="streaming-spinner"></span> 导师正在凝神推演东西方气场象意...`;
+      statusContainer.innerHTML = `<span class="streaming-spinner"></span> 正在结合八字与塔罗信息分析...`;
       statusContainer.style.display = "flex";
     }
 
@@ -609,7 +609,7 @@ document.addEventListener("DOMContentLoaded", () => {
       onDone: (fullText) => {
         isDeepSeekStreaming = false;
         if (statusContainer) {
-          statusContainer.innerHTML = `<span>✨</span> 天机推演完毕`;
+          statusContainer.innerHTML = `<span>✨</span> 解盘分析完毕`;
           setTimeout(() => { statusContainer.style.display = "none"; }, 2500);
         }
       },
@@ -776,13 +776,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     AppState.chatMessages = [
       { role: "system", content: DeepSeekClient.getSystemPrompt() },
-      { role: "user", content: `这是我刚占卜排出的命盘与卦象数据：\n${JSON.stringify(payload, null, 2)}\n请基于此准备为我解答后续追问。` },
-      { role: "assistant", content: `我已经知晓你的命盘与三才卦象（问测【${res.topicName}】，坐向【${res.direction}】，天机断语「${res.overview.keyPhrase}」）。随时可以针对具体细节向我提问。` }
+      { role: "user", content: `这是我刚占卜排出的命盘与卦象数据：\n${JSON.stringify(payload, null, 2)}\n请基于此准备为我解答后续提问。` },
+      { role: "assistant", content: `我已经结合你问测的【${res.topicName}】、坐向【${res.direction}】与排盘结果进行分析。随时可以针对具体问题向我提问。` }
     ];
 
     const welcomeEl = document.getElementById("chat-initial-welcome");
     if (welcomeEl) {
-      welcomeEl.innerHTML = `已为你锁定问测【<strong>${res.topicName}</strong>】的命盘与三才卦象（坐向【<strong>${res.direction}</strong>】）。若有没看懂的牌意、想深究的具体时机、或现实困惑，请随时向我提问：`;
+      welcomeEl.innerHTML = `已为你生成问测【<strong>${res.topicName}</strong>】的占卜结果，当前坐向为【<strong>${res.direction}</strong>】。若有没看懂的牌意、想进一步了解的细节或具体建议，请随时提问。`;
     }
 
     const messagesContainer = document.getElementById("chat-messages-container");
@@ -818,14 +818,14 @@ document.addEventListener("DOMContentLoaded", () => {
     messagesContainer.appendChild(userRow);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-    // 2. 添加导师回复占位气泡
+    // 2. 添加助手回复占位气泡
     const sageRow = document.createElement("div");
     sageRow.className = "chat-message-row msg-sage";
     sageRow.innerHTML = `
       <div class="msg-avatar">☯</div>
       <div class="msg-bubble">
-        <div class="msg-sender">玄学通义导师</div>
-        <div class="msg-text"><span class="streaming-spinner"></span> 导师正在研析卦象推演...</div>
+        <div class="msg-sender">占卜助手</div>
+        <div class="msg-text"><span class="streaming-spinner"></span> 正在分析并生成解答...</div>
       </div>
     `;
     messagesContainer.appendChild(sageRow);
@@ -886,7 +886,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function generateLocalContextualAnswer(question, res, bazi) {
-    if (!res) return "请先完成一次排盘占卜，导师方能据此推演。";
+    if (!res) return "请先完成一次排盘占卜，以便据此解答。";
     const cards = res.cardReadings;
     const dominant = res.radar.dominant;
     const deficient = res.radar.deficient;
@@ -895,18 +895,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (question.includes("隐患") || question.includes("矛盾") || question.includes("化解")) {
       const earthPos = cards[2] || cards[0];
-      return `【卦象隐患与破解之法】\n\n从地位（隐患位）观之，显现为「${earthPos.cardName}·${earthPos.orientation}」（五行属${earthPos.cardWuxing}）。\n\n- **核心症结**：此牌指示你在现实层面可能面临“${earthPos.keywords.slice(0, 2).join("与")}”的潜在阻力。结合时空五行，当前牌局【${dominant}旺${deficient}弱】，容易导致心神不宁或执行受阻。\n- **破局化解**：首要在【${focalDir}】进行环境调理（如配置${res.fengshuiGuidance.recommendedItems}），以${res.fengshuiGuidance.recommendedColor}柔化火气，守住底线方能反客为主。`;
+      return `关于隐患与化解方法：\n\n地位隐患位显现为 ${earthPos.cardName} ${earthPos.orientation}，五行属${earthPos.cardWuxing}。\n\n1. 核心症结：指示你在现实层面可能面临 ${earthPos.keywords.slice(0, 2).join("与")} 的阻力。当前五行气场为${dominant}旺${deficient}弱，容易出现思绪波动或推进受阻。\n2. 化解建议：重点在【${focalDir}】进行环境整理，可摆放 ${res.fengshuiGuidance.recommendedItems}，以 ${res.fengshuiGuidance.recommendedColor} 配色调和气场，保持稳健节奏即可化解。`;
     }
 
     if (question.includes("时间") || question.includes("月份") || question.includes("时机") || question.includes("转机")) {
-      return `【关键时机与转机推演】\n\n结合你的日元「${dayMaster}」与当前坐向「${res.direction}」：\n\n- **最佳契机**：五行中【${deficient}气】生旺之时转机最明显。一般在农历【${deficient === '水' ? '冬月/腊月' : deficient === '木' ? '春季二三月' : deficient === '火' ? '夏季四五月' : '四季末月'}】前后气场最为通达。\n- **行动法则**：在转机显现之前，务必按「${res.overview.keyPhrase}」之训，暗中积累实力，勿打无准备之仗。`;
+      return `关于转机出现的时间点：\n\n结合你的日元 ${dayMaster} 与当前坐向 ${res.direction} 分析：\n\n1. 最佳契机：在五行中【${deficient}】能量生旺的时间段转机最为明显，通常在农历【${deficient === '水' ? '冬月或腊月' : deficient === '木' ? '春季二三月' : deficient === '火' ? '夏季四五月' : '季末交替月份'}】前后整体运势更为顺畅。\n2. 行动建议：在转机显现之前，建议按「${res.overview.keyPhrase}」的指引，先做好前期准备，稳步推进。`;
     }
 
     if (question.includes("行动") || question.includes("做") || question.includes("建议")) {
-      return `【现实行动指引】\n\n针对当前三才卦象，建议你从以下两点切入：\n\n1. **心念端正**：面对「${cards[1]?.cardName || '当下'}」所指引的局面，摒弃过往的迟疑，明确自身底线。\n2. **空间借力**：${res.fengshuiGuidance.actionAdvice}\n\n内外合一，方能破局。`;
+      return `关于接下来的具体行动：\n\n结合排盘结果，建议从以下两点着手：\n\n1. 明确重心：面对 ${cards[1]?.cardName || '当下'} 所呈现的局势，建议理清优先顺序，明确自己的核心诉求与底线。\n2. 空间借力：${res.fengshuiGuidance.actionAdvice}\n\n保持内外一致，有助于更快打开局面。`;
     }
 
-    return `【导师深度解析】\n\n关于你所问之「${question}」：\n\n纵观你的人位当下「${cards[1]?.cardName}（${cards[1]?.orientation}）」与天位前景「${cards[0]?.cardName}」：事态发展的脉络清晰——外在环境对你的制约正处于关键转变期。以「${dayMaster}」之本性，凡事宜先稳固后方阵地，方能在适当时机顺势而为。`;
+    return `关于你所问的「${question}」：\n\n结合当前人位抽取的 ${cards[1]?.cardName} ${cards[1]?.orientation} 与天位前景的 ${cards[0]?.cardName}，整体发展正处于关键转变期。结合本命日元 ${dayMaster} 的特点，建议先稳固基础，再顺势推进。`;
   }
 
   // 14. 复制解盘摘要
@@ -915,15 +915,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!res) return;
 
     const cardsText = res.cardReadings.map(c => 
-      `· ${c.positionName}：${c.cardName}（${c.orientation}，五行${c.cardWuxing}）\n  释义：${c.plainExplanation.oneLiner}`
+      `· ${c.positionName}：${c.cardName} ${c.orientation}，五行属${c.cardWuxing}\n  释义：${c.plainExplanation.oneLiner}`
     ).join("\n\n");
 
-    const text = `【天机阁 · 风水塔罗解盘报告】
+    const text = `【风水与塔罗占卜报告】
 问测诉求：${res.topicName}
-时空坐向：${res.direction}（${res.baguaInfo.gua}卦）
+当前坐向：${res.direction} ${res.baguaInfo.gua}卦
 本命日元：${AppState.baziResult ? AppState.baziResult.dayMaster.name : "随缘"}
 
-总揽天机：「${res.overview.keyPhrase}」
+核心断语：「${res.overview.keyPhrase}」
 ${res.overview.summaryText}
 
 三才卦象：
