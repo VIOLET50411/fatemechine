@@ -243,7 +243,10 @@
           <!-- 陀螺仪开关 -->
           <div class="compass-sensor-toggle">
             <button type="button" class="btn-secondary" id="btn-toggle-gyro">
-              <span>🧭</span> <span id="gyro-btn-text">开启设备陀螺仪感测</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;">
+                <polygon points="12 2 19 21 12 17 5 21 12 2"></polygon>
+              </svg>
+              <span id="gyro-btn-text">开启设备陀螺仪感测</span>
             </button>
           </div>
         </div>
@@ -307,7 +310,11 @@
 
         <div class="cards-action-footer">
           <button type="button" class="btn-secondary" id="btn-re-shuffle">
-            <span>🔄</span> 重新洗牌
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span>重新洗牌</span>
           </button>
           <button type="button" class="btn-primary" id="btn-start-spread" disabled>
             <span>开启三才神煞阵 · 解盘</span> <span>→</span>
@@ -334,10 +341,17 @@
         <!-- 结果页 Tab 切换 -->
         <div class="result-tabs-nav">
           <button type="button" class="tab-nav-btn active" id="tab-btn-simple">
-            <span>📖</span> 通俗极速解读
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 5px;">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 1-4 4v14a3 3 0 0 0 3-3h7z"></path>
+            </svg>
+            <span>通俗极速解读</span>
           </button>
           <button type="button" class="tab-nav-btn" id="tab-btn-deepseek">
-            <span>🔮</span> DeepSeek 深度解盘
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 5px;">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+            </svg>
+            <span>DeepSeek 深度解盘</span>
           </button>
         </div>
 
@@ -408,7 +422,11 @@
           <div class="chat-input-row">
             <textarea id="chat-input-textarea" class="chat-textarea" rows="2" placeholder="在此输入你的具体问题，例如：我没完全看懂那张逆位牌代表什么意思？"></textarea>
             <button type="button" class="btn-primary btn-chat-send" id="btn-chat-send">
-              <span>发送</span> <span>➤</span>
+              <span>发送</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-left: 2px;">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
             </button>
           </div>
         </div>
@@ -416,10 +434,18 @@
         <!-- 底部全局操作 -->
         <div class="result-actions-footer">
           <button type="button" class="btn-secondary" id="btn-copy-reading">
-            <span>📋</span> 复制解盘摘要
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>复制解盘摘要</span>
           </button>
           <button type="button" class="btn-primary" id="btn-restart-divination">
-            <span>🔄</span> 重新开启一次占卜
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>重新开启占卜</span>
           </button>
         </div>
 
@@ -579,7 +605,7 @@
   <!-- 占卜历史抽屉 (History Drawer) -->
   <div class="history-drawer-panel" id="history-drawer">
     <div class="drawer-header">
-      <h3 class="modal-title">📜 历次占卜记录</h3>
+      <h3 class="modal-title">历次占卜记录</h3>
       <button type="button" class="modal-close-btn" id="btn-close-history">&times;</button>
     </div>
     <div class="drawer-body" id="history-items-list"></div>

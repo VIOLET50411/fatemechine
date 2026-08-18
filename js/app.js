@@ -505,28 +505,49 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="fengshui-grid-items">
             <div class="fs-item">
-              <span class="fs-icon">🧭</span>
+              <span class="fs-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 19 21 12 17 5 21 12 2"></polygon>
+                </svg>
+              </span>
               <span class="fs-label">吉利方位</span>
               <span class="fs-val">${g.focalDirection}</span>
             </div>
             <div class="fs-item">
-              <span class="fs-icon">🎨</span>
+              <span class="fs-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                  <path d="M2 12h20"></path>
+                </svg>
+              </span>
               <span class="fs-label">调和色系</span>
               <span class="fs-val">${g.recommendedColor}</span>
             </div>
             <div class="fs-item">
-              <span class="fs-icon">🪴</span>
+              <span class="fs-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+              </span>
               <span class="fs-label">适宜器物</span>
               <span class="fs-val">${g.recommendedItems}</span>
             </div>
             <div class="fs-item">
-              <span class="fs-icon">✨</span>
+              <span class="fs-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 11 12 14 22 4"></polyline>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+              </span>
               <span class="fs-label">日常行动</span>
               <span class="fs-val">${g.actionAdvice}</span>
             </div>
           </div>
           <div class="fs-mindset-quote">
-            <span>📿 ${g.mindsetTip}</span>
+            <span>${g.mindsetTip}</span>
           </div>
         </div>
       `;
@@ -573,9 +594,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!DeepSeekClient.hasKey()) {
       streamContainer.innerHTML = `
         <div class="deepseek-no-key-prompt">
-          <div class="prompt-icon">🔮</div>
+          <div class="prompt-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
           <h3>尚未配置 DeepSeek API Key</h3>
-          <p>深度通义解盘由 DeepSeek 模型提供大模型交叉推演。请在右上角设置中填入你的 DeepSeek API Key 即可开启无限次深度解盘。</p>
+          <p>深度解盘由 DeepSeek 模型提供大模型交叉推演。请在右上角设置中填入你的 DeepSeek API Key 即可开启无限次深度解盘。</p>
           <button type="button" class="btn-primary" id="btn-prompt-open-settings">立即配置 API Key</button>
         </div>
       `;
@@ -609,7 +635,7 @@ document.addEventListener("DOMContentLoaded", () => {
       onDone: (fullText) => {
         isDeepSeekStreaming = false;
         if (statusContainer) {
-          statusContainer.innerHTML = `<span>✨</span> 解盘分析完毕`;
+          statusContainer.innerHTML = `<span>解盘分析完毕</span>`;
           setTimeout(() => { statusContainer.style.display = "none"; }, 2500);
         }
       },
@@ -809,7 +835,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const userRow = document.createElement("div");
     userRow.className = "chat-message-row msg-user";
     userRow.innerHTML = `
-      <div class="msg-avatar">👤</div>
+      <div class="msg-avatar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
       <div class="msg-bubble">
         <div class="msg-sender">你</div>
         <div class="msg-text">${escapeHtml(question)}</div>
@@ -870,7 +901,7 @@ document.addEventListener("DOMContentLoaded", () => {
           sageTextEl.innerHTML = `
             ${DeepSeekClient.renderMarkdown(localAnswer)}
             <div style="margin-top:0.75rem; padding-top:0.5rem; border-top:1px dashed var(--border-subtle); font-size:0.8rem; color:var(--text-muted);">
-              💡 提示：若想进行更具深度、不限轮次的多轮 AI 自由推演，可点击右上角「秘境设置」填入你的 DeepSeek API Key。
+              提示：如需开启多轮大模型深度对话解答，可在右上角「设置」中配置 DeepSeek API Key。
             </div>
           `;
           messagesContainer.scrollTop = messagesContainer.scrollHeight;

@@ -213,7 +213,7 @@
     startDeviceOrientationListening() {
       this.isSensorActive = true;
       if (this.sensorBtn) {
-        this.sensorBtn.innerHTML = `<span>🟢</span> <span id="gyro-btn-text">指南针感测中 · 实时定向</span>`;
+        this.sensorBtn.innerHTML = `<span class="sensor-indicator-dot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#34c759; margin-right:6px; vertical-align:middle; box-shadow:0 0 8px rgba(52,199,89,0.7);"></span><span id="gyro-btn-text">指南针感测中 · 实时定向</span>`;
         this.sensorBtn.classList.add("sensor-active");
       }
 
