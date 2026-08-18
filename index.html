@@ -82,7 +82,7 @@
     <!-- 阶段 1：选择占卜主题 -->
     <section class="app-step-section" id="section-topic">
       <div class="section-page-header">
-        <div class="page-step-indicator">第 1 步 · 缘起定心</div>
+        <div class="page-step-indicator">第 1 步</div>
         <h2 class="page-main-title">请选择你当下的占卜诉求</h2>
         <p class="page-sub-desc">心诚则灵，心念聚集之处，即是气机生发之时</p>
       </div>
@@ -125,7 +125,7 @@
     <!-- 阶段 2：输入生辰八字 -->
     <section class="app-step-section" id="section-bazi">
       <div class="section-page-header">
-        <div class="page-step-indicator">第 2 步 · 命盘排演</div>
+        <div class="page-step-indicator">第 2 步</div>
         <h2 class="page-main-title">输入生辰信息，排出乾坤四柱</h2>
         <p class="page-sub-desc">系统将自动推演你的本命五行旺衰与喜用神（支持详简随时切换）</p>
       </div>
@@ -149,93 +149,146 @@
 
           <div class="bazi-select-row">
             <div class="form-group">
-              <label class="form-label" for="select-birth-year">出生年份</label>
+              <label class="form-label">出生年份</label>
               <select id="select-birth-year" class="form-select"></select>
             </div>
             <div class="form-group">
-              <label class="form-label" for="select-birth-month">出生月份</label>
+              <label class="form-label">出生月份</label>
               <select id="select-birth-month" class="form-select"></select>
             </div>
           </div>
 
           <div class="bazi-select-row">
             <div class="form-group">
-              <label class="form-label" for="select-birth-day">出生日期</label>
+              <label class="form-label">出生日期</label>
               <select id="select-birth-day" class="form-select"></select>
             </div>
             <div class="form-group">
-              <label class="form-label" for="select-birth-hour">出生时段（时辰）</label>
+              <label class="form-label">出生时辰</label>
               <select id="select-birth-hour" class="form-select">
-                <option value="0">23:00-01:00（子时·深夜）</option>
-                <option value="2">01:00-03:00（丑时·凌晨）</option>
-                <option value="4">03:00-05:00（寅时·拂晓）</option>
-                <option value="6">05:00-07:00（卯时·清晨）</option>
-                <option value="8">07:00-09:00（辰时·早晨）</option>
-                <option value="10">09:00-11:00（巳时·上午）</option>
-                <option value="12" selected>11:00-13:00（午时·正午）</option>
-                <option value="14">13:00-15:00（未时·午后）</option>
-                <option value="16">15:00-17:00（申时·下午）</option>
-                <option value="18">17:00-19:00（酉时·傍晚）</option>
-                <option value="20">19:00-21:00（戌时·黄昏）</option>
-                <option value="22">21:00-23:00（亥时·人定）</option>
-                <option value="">不清楚时辰（按三柱推演）</option>
+                <option value="0">子时 (23:00-01:00)</option>
+                <option value="2">丑时 (01:00-03:00)</option>
+                <option value="4">寅时 (03:00-05:00)</option>
+                <option value="6">卯时 (05:00-07:00)</option>
+                <option value="8">辰时 (07:00-09:00)</option>
+                <option value="10">巳时 (09:00-11:00)</option>
+                <option value="12" selected>午时 (11:00-13:00)</option>
+                <option value="14">未时 (13:00-15:00)</option>
+                <option value="16">申时 (15:00-17:00)</option>
+                <option value="18">酉时 (17:00-19:00)</option>
+                <option value="20">戌时 (19:00-21:00)</option>
+                <option value="22">亥时 (21:00-23:00)</option>
               </select>
             </div>
           </div>
 
-          <div class="form-hint">
-            💡 提示：如不清楚精确出生时辰，可选择“不清楚时辰”，系统将依据年月日三柱推排五行底色。
-          </div>
+          <p class="form-hint" style="margin-top: 0.5rem;">* 不清楚具体出生时辰可默认选择午时，主要格局依托年月日三柱</p>
 
           <div class="bazi-action-btns">
-            <button type="button" class="btn-secondary" id="btn-bazi-back">← 返回重选主题</button>
-            <button type="button" class="btn-primary" id="btn-bazi-next">锁定命盘 · 定方位 →</button>
+            <button type="button" class="btn-secondary" id="btn-bazi-back">← 上一步</button>
+            <button type="button" class="btn-primary" id="btn-bazi-next">定准命盘 · 下一步 →</button>
           </div>
         </div>
 
-        <!-- 右侧实时命盘卡片 -->
-        <div id="bazi-result-preview"></div>
+        <!-- 右侧命盘卡片 -->
+        <div class="bazi-chart-card" id="bazi-chart-display">
+          <div class="bazi-chart-header">
+            <div>
+              <span class="bazi-badge-gold" id="bazi-day-master-tag">日主天干：庚金</span>
+              <span class="bazi-pillars-summary" id="bazi-pillars-text">（乙亥 甲申 庚午 壬午）</span>
+            </div>
+            <button type="button" class="btn-toggle-bazi-mode" id="btn-toggle-bazi-mode">
+              <span>📖</span> <span id="bazi-mode-label">切换通俗说明</span>
+            </button>
+          </div>
+
+          <!-- 四柱八字排盘表 -->
+          <div class="bazi-pillars-grid">
+            <div class="pillar-col">
+              <span class="p-tag">年柱</span>
+              <span class="p-val" id="pillar-year-val">乙亥</span>
+              <span class="p-wuxing" id="pillar-year-wx">木水</span>
+            </div>
+            <div class="pillar-col">
+              <span class="p-tag">月柱</span>
+              <span class="p-val" id="pillar-month-val">甲申</span>
+              <span class="p-wuxing" id="pillar-month-wx">木金</span>
+            </div>
+            <div class="pillar-col active-master">
+              <span class="p-tag">日柱 (本命)</span>
+              <span class="p-val master-stem" id="pillar-day-val">庚午</span>
+              <span class="p-wuxing" id="pillar-day-wx">金火</span>
+            </div>
+            <div class="pillar-col">
+              <span class="p-tag">时柱</span>
+              <span class="p-val" id="pillar-hour-val">壬午</span>
+              <span class="p-wuxing" id="pillar-hour-wx">水火</span>
+            </div>
+          </div>
+
+          <!-- 五行强弱概览 -->
+          <div class="bazi-wuxing-summary-row">
+            <div class="bazi-master-info">
+              <span>日元本命五行：<strong id="bazi-master-element" style="color:var(--wx-metal)">金</strong></span>
+              <span>身旺/身弱：<strong id="bazi-strength-status" class="status-badge">身弱</strong></span>
+              <span>格局喜用神：<strong id="bazi-favor-element" style="color:var(--wx-earth)">土、金</strong></span>
+            </div>
+            <div class="bazi-wuxing-bars" id="bazi-wuxing-bars-container">
+              <!-- 动态填充五行统计条 -->
+            </div>
+          </div>
+
+          <!-- 命理详析与通俗建议 -->
+          <div class="bazi-explanation-box">
+            <p class="bazi-exp-text" id="bazi-explanation-text">
+              日主庚金生于初秋，金水相涵。做事果断刚毅，重情重义；适宜以厚土培金、以比劫助身，在西方或西南方位布局更利于气场生旺。
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 阶段 3：确定方位（罗盘） -->
+    <!-- 阶段 3：八卦罗盘方位感测 -->
     <section class="app-step-section" id="section-compass">
       <div class="section-page-header">
-        <div class="page-step-indicator">第 3 步 · 罗盘定局</div>
-        <h2 class="page-main-title">确定你当前的空间朝向</h2>
-        <p class="page-sub-desc">可转动手机启用电子指南针，或直接点击/滑动八卦罗盘定下坐向</p>
+        <div class="page-step-indicator">第 3 步</div>
+        <h2 class="page-main-title">定夺当下空间坐向与八卦气场</h2>
+        <p class="page-sub-desc">支持手机陀螺仪指南针自动感测，亦可手动旋转或点击快速选择</p>
       </div>
 
-      <div class="compass-layout-container" id="compass-interactive-box">
-        <!-- 罗盘视觉区域 -->
+      <div class="compass-layout-container">
+        <!-- 罗盘交互表盘 -->
         <div class="compass-visual-area">
-          <div class="compass-dial-outer">
-            <div class="compass-dial">
+          <div class="compass-dial-outer" id="compass-interactive-box">
+            <div class="compass-dial" id="compass-dial-ring">
+              <!-- 八卦方位文字 -->
               <div class="dial-bagua-labels">
-                <div class="dial-item dir-n">坎北</div>
-                <div class="dial-item dir-ne">艮东北</div>
-                <div class="dial-item dir-e">震东</div>
-                <div class="dial-item dir-se">巽东南</div>
-                <div class="dial-item dir-s">离南</div>
-                <div class="dial-item dir-sw">坤西南</div>
-                <div class="dial-item dir-w">兑西</div>
-                <div class="dial-item dir-nw">乾西北</div>
+                <div class="dial-item dir-n"><span>坎</span><br><small>北</small></div>
+                <div class="dial-item dir-ne"><span>艮</span><br><small>东北</small></div>
+                <div class="dial-item dir-e"><span>震</span><br><small>东</small></div>
+                <div class="dial-item dir-se"><span>巽</span><br><small>东南</small></div>
+                <div class="dial-item dir-s"><span>离</span><br><small>南</small></div>
+                <div class="dial-item dir-sw"><span>坤</span><br><small>西南</small></div>
+                <div class="dial-item dir-w"><span>兑</span><br><small>西</small></div>
+                <div class="dial-item dir-nw"><span>乾</span><br><small>西北</small></div>
               </div>
             </div>
 
-            <!-- 指针 -->
-            <div class="compass-needle">
+            <!-- 罗盘指针（红南黑北） -->
+            <div class="compass-needle" id="compass-magnetic-needle">
               <div class="needle-north"></div>
-              <div class="needle-south"></div>
               <div class="needle-pivot"></div>
+              <div class="needle-south"></div>
             </div>
 
+            <!-- 中心太极图腾 -->
             <div class="compass-center-taiji">☯</div>
           </div>
 
+          <!-- 陀螺仪开关 -->
           <div class="compass-sensor-toggle">
-            <button type="button" class="btn-secondary btn-enable-sensor">
-              <span>🧭</span> 启用设备指南针感测
+            <button type="button" class="btn-secondary" id="btn-toggle-gyro">
+              <span>🧭</span> <span id="gyro-btn-text">开启设备陀螺仪感测</span>
             </button>
           </div>
         </div>
@@ -243,34 +296,35 @@
         <!-- 罗盘信息面板 -->
         <div class="compass-info-panel">
           <div class="compass-current-badge">
-            <span class="compass-gua-name">离卦</span>
+            <div class="compass-gua-name" id="compass-current-gua">离卦</div>
             <div>
-              <div class="compass-dir-name">正坐朝向 · 南</div>
-              <span class="compass-wuxing-tag wx-火">五行属火</span>
+              <div class="compass-dir-name" id="compass-current-dir">正南方 (180°)</div>
+              <span class="compass-wuxing-tag" id="compass-current-wuxing" style="color:var(--wx-fire); background:var(--wx-fire-glow)">五行属火 · 九紫右弼</span>
             </div>
           </div>
 
-          <p class="compass-desc-text">
-            离火居南，主名望威仪、远景光明与心性热情。在此朝向推演，事业与名誉能量倍增。
+          <p class="compass-desc-text" id="compass-current-desc">
+            当前坐向处于正南离宫，火气升腾，主名誉声望、文思灵感与远大前程。与权杖牌组及光明类卡牌有强烈的时空共振效应。
           </p>
 
+          <!-- 8 方向一键快速选择 -->
           <div class="compass-quick-select">
-            <div class="quick-select-label">快速指定常用朝向：</div>
+            <span class="quick-select-label">快速点击切换方位：</span>
             <div class="quick-buttons-grid">
-              <button type="button" class="compass-quick-btn" data-dir="东">正东·震</button>
-              <button type="button" class="compass-quick-btn active" data-dir="南">正南·离</button>
-              <button type="button" class="compass-quick-btn" data-dir="西">正西·兑</button>
-              <button type="button" class="compass-quick-btn" data-dir="北">正北·坎</button>
-              <button type="button" class="compass-quick-btn" data-dir="东南">东南·巽</button>
-              <button type="button" class="compass-quick-btn" data-dir="东北">东北·艮</button>
-              <button type="button" class="compass-quick-btn" data-dir="西南">西南·坤</button>
-              <button type="button" class="compass-quick-btn" data-dir="西北">西北·乾</button>
+              <button type="button" class="compass-quick-btn" data-dir="正北">坎北</button>
+              <button type="button" class="compass-quick-btn" data-dir="东北">艮东北</button>
+              <button type="button" class="compass-quick-btn" data-dir="正东">震东</button>
+              <button type="button" class="compass-quick-btn" data-dir="东南">巽东南</button>
+              <button type="button" class="compass-quick-btn active" data-dir="正南">离南</button>
+              <button type="button" class="compass-quick-btn" data-dir="西南">坤西南</button>
+              <button type="button" class="compass-quick-btn" data-dir="正西">兑西</button>
+              <button type="button" class="compass-quick-btn" data-dir="西北">乾西北</button>
             </div>
           </div>
 
           <div class="bazi-action-btns">
-            <button type="button" class="btn-secondary" id="btn-compass-back">← 返回八字</button>
-            <button type="button" class="btn-primary" id="btn-compass-next">锁定方位 · 开始洗牌 →</button>
+            <button type="button" class="btn-secondary" id="btn-compass-back">← 上一步</button>
+            <button type="button" class="btn-primary" id="btn-compass-next">锁定方位 · 开启洗牌 →</button>
           </div>
         </div>
       </div>
@@ -284,7 +338,7 @@
     <!-- 阶段 5：扇形自由抽牌 -->
     <section class="app-step-section" id="section-cards">
       <div class="section-page-header">
-        <div class="page-step-indicator">第 4 步 · 心感神应</div>
+        <div class="page-step-indicator">第 4 步</div>
         <h2 class="page-main-title">请凭第一直觉，抽取三张灵牌</h2>
         <p class="page-sub-desc">分别定立【天位·前景】、【人位·当下】、【地位·隐患】三才阵位</p>
       </div>
@@ -310,7 +364,7 @@
     <!-- 阶段 6：三才阵位落牌与3D翻牌 -->
     <section class="app-step-section" id="section-spread">
       <div class="section-page-header">
-        <div class="page-step-indicator">三才归位 · 气机交感</div>
+        <div class="page-step-indicator">第 5 步</div>
         <h2 class="page-main-title">八卦阵位正在显象</h2>
         <p class="page-sub-desc">三才时空气场逐一贯通，正在为你解开天机...</p>
       </div>

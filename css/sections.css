@@ -49,9 +49,7 @@
   font-weight: 900;
   letter-spacing: 0.08em;
   margin-bottom: 0.5rem;
-  background: linear-gradient(180deg, #ffffff 0%, #dcdde1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-primary);
 }
 
 .page-sub-desc {
@@ -189,9 +187,9 @@
 }
 
 .topic-select-card {
-  background: rgba(18, 24, 38, 0.52);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  background: var(--bg-card);
+  border: var(--glass-border);
+  border-top: var(--glass-border-highlight);
   border-radius: var(--radius-lg);
   padding: 2rem 1.5rem;
   cursor: pointer;
@@ -220,8 +218,8 @@
 
 .topic-select-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(243, 209, 121, 0.45);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px var(--topic-glow, var(--gold-glow));
+  border-color: var(--gold-bright);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25), 0 0 25px var(--topic-glow, var(--gold-glow));
 }
 
 .topic-select-card:hover::before {
@@ -236,7 +234,7 @@
 .topic-card-title {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .topic-card-element {
@@ -1580,6 +1578,57 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
+[data-theme="light"] .quick-portal-item {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 24px rgba(160, 175, 195, 0.18);
+}
+
+[data-theme="light"] .portal-title {
+  color: #1e272e;
+}
+
+[data-theme="light"] .portal-desc {
+  color: #718093;
+}
+
+[data-theme="light"] .topic-select-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 28px rgba(160, 175, 195, 0.22);
+}
+
+[data-theme="light"] .topic-select-card:hover {
+  border-color: var(--gold-bright);
+  box-shadow: 0 16px 36px rgba(160, 175, 195, 0.35), 0 0 20px var(--topic-glow, var(--gold-glow));
+}
+
+[data-theme="light"] .topic-card-title {
+  color: #1e272e;
+}
+
+[data-theme="light"] .topic-card-desc {
+  color: #485460;
+}
+
+[data-theme="light"] .bazi-input-panel,
+[data-theme="light"] .bazi-chart-card,
+[data-theme="light"] .compass-info-panel,
+[data-theme="light"] .selected-bar-container,
+[data-theme="light"] .result-overview-box,
+[data-theme="light"] .radar-card-inner,
+[data-theme="light"] .fengshui-card-inner,
+[data-theme="light"] .result-card-detail-card,
+[data-theme="light"] .deepseek-stream-box,
+[data-theme="light"] .result-chat-section {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 32px rgba(160, 175, 195, 0.2);
+}
+
 [data-theme="light"] .compass-dial-outer {
   background: radial-gradient(circle, rgba(255, 255, 255, 0.92) 0%, rgba(240, 244, 250, 0.98) 100%);
   border: 2px solid rgba(184, 134, 11, 0.4);
@@ -1589,6 +1638,14 @@
 [data-theme="light"] .compass-quick-btn {
   background: rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.06);
+  color: #485460;
+}
+
+[data-theme="light"] .compass-quick-btn:hover,
+[data-theme="light"] .compass-quick-btn.active {
+  background: rgba(184, 134, 11, 0.12);
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
 }
 
 [data-theme="light"] .pillar-col {
@@ -1605,6 +1662,10 @@
   color: #1e272e;
 }
 
+[data-theme="light"] .bazi-pillars-summary {
+  color: #1e272e;
+}
+
 [data-theme="light"] .bazi-wuxing-summary-row {
   background: rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -1612,6 +1673,14 @@
 
 [data-theme="light"] .bazi-explanation-box {
   background: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="light"] .bazi-exp-text {
+  color: #2c3e50;
+}
+
+[data-theme="light"] .compass-desc-text {
+  color: #485460;
 }
 
 [data-theme="light"] .selected-slot {
@@ -1628,13 +1697,48 @@
   color: #1e272e;
 }
 
+[data-theme="light"] .tab-nav-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #485460;
+}
+
+[data-theme="light"] .tab-nav-btn.active {
+  background: rgba(184, 134, 11, 0.12);
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+}
+
+[data-theme="light"] .overview-keyphrase {
+  background: none;
+  -webkit-text-fill-color: var(--gold-bright);
+  color: var(--gold-bright);
+}
+
+[data-theme="light"] .overview-summary-text {
+  color: #2c3e50;
+}
+
 [data-theme="light"] .fs-item {
   background: rgba(0, 0, 0, 0.02);
   border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
+[data-theme="light"] .fs-val {
+  color: #1e272e;
+}
+
+[data-theme="light"] .c-name {
+  color: #1e272e;
+}
+
+[data-theme="light"] .c-meaning-text {
+  color: #2c3e50;
+}
+
 [data-theme="light"] .c-spatial-text {
   background: rgba(0, 0, 0, 0.03);
+  color: #485460;
 }
 
 [data-theme="light"] .quick-prompts-bar {
@@ -1645,25 +1749,22 @@
 [data-theme="light"] .btn-quick-prompt {
   background: rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #485460;
 }
 
 [data-theme="light"] .msg-bubble {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 4px 12px rgba(120, 130, 150, 0.08);
+}
+
+[data-theme="light"] .msg-text {
+  color: #2c3e50;
 }
 
 [data-theme="light"] .chat-textarea {
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(0, 0, 0, 0.12);
-  color: #1e272e;
-}
-
-[data-theme="light"] .c-name {
-  color: #1e272e;
-}
-
-[data-theme="light"] .topic-card-title {
   color: #1e272e;
 }
 
