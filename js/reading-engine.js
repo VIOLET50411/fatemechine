@@ -24,7 +24,7 @@
       const FengshuiEngine = getFengshuiEngine();
 
       const topicTitles = {
-        career: "事业功名",
+        career: "事业学业",
         love: "情感姻缘",
         wealth: "财禄丰殖",
         home: "居所宅运"

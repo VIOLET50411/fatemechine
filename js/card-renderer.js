@@ -4,30 +4,30 @@
  */
 
 (function(root) {
-  // 经典塔罗大阿卡纳与小阿卡纳专属图腾与副标题定义
+  // 经典塔罗大阿卡纳专属秘义副标题定义
   const ARCHETYPE_ICONS = {
-    0: { icon: "🎒", symbol: "🧳", aura: "0 · The Fool", subtitle: "自由探索 · 纯真启程" },
-    1: { icon: "🪄", symbol: "♾️", aura: "I · The Magician", subtitle: "如其在上 · 如其在下" },
-    2: { icon: "🌙", symbol: "🏛️", aura: "II · High Priestess", subtitle: "直觉深邃 · 隐秘真理" },
-    3: { icon: "👑", symbol: "🌾", aura: "III · The Empress", subtitle: "丰饶繁衍 · 厚德载物" },
-    4: { icon: "♈", symbol: "🏰", aura: "IV · The Emperor", subtitle: "乾纲独断 · 秩序权威" },
-    5: { icon: "🗝️", symbol: "🪽", aura: "V · The Hierophant", subtitle: "精神传承 · 明师指路" },
-    6: { icon: "🕊️", symbol: "❤️", aura: "VI · The Lovers", subtitle: "灵肉契合 · 神圣契约" },
-    7: { icon: "🛡️", symbol: "⚔️", aura: "VII · The Chariot", subtitle: "乘风破浪 · 旗开得胜" },
-    8: { icon: "🦁", symbol: "♾️", aura: "VIII · Strength", subtitle: "以柔克刚 · 慈悲定力" },
-    9: { icon: "🏮", symbol: "🏔️", aura: "IX · The Hermit", subtitle: "孤灯照夜 · 内求真道" },
-    10: { icon: "☸️", symbol: "✨", aura: "X · Wheel of Fortune", subtitle: "时空流转 · 因果循环" },
-    11: { icon: "⚖️", symbol: "🗡️", aura: "XI · Justice", subtitle: "法理昭彰 · 业力平衡" },
-    12: { icon: "🌟", symbol: "🌳", aura: "XII · The Hanged Man", subtitle: "逆向顿悟 · 灵性觉醒" },
-    13: { icon: "🥀", symbol: "🦅", aura: "XIII · Death", subtitle: "旧局断灭 · 涅槃重生" },
-    14: { icon: "🕊️", symbol: "🏺", aura: "XIV · Temperance", subtitle: "甘露交融 · 动态平衡" },
-    15: { icon: "🐐", symbol: "🔥", aura: "XV · The Devil", subtitle: "物质执念 · 照见阴影" },
-    16: { icon: "⚡", symbol: "🏰", aura: "XVI · The Tower", subtitle: "假象崩解 · 惊雷破晓" },
-    17: { icon: "⭐", symbol: "🏺", aura: "XVII · The Star", subtitle: "希望如泉 · 抚平创伤" },
-    18: { icon: "🐺", symbol: "🌕", aura: "XVIII · The Moon", subtitle: "潜意识涌 · 拨开迷雾" },
-    19: { icon: "☀️", symbol: "🌻", aura: "XIX · The Sun", subtitle: "如日中天 · 生命昂扬" },
-    20: { icon: "📯", symbol: "🕊️", aura: "XX · Judgement", subtitle: "神圣号角 · 灵魂召选" },
-    21: { icon: "🌌", symbol: "🌿", aura: "XXI · The World", subtitle: "环宇通达 · 大千圆满" }
+    0: { symbol: "☉", aura: "0 · The Fool", subtitle: "自由探索 · 纯真启程" },
+    1: { symbol: "☿", aura: "I · The Magician", subtitle: "如其在上 · 如其在下" },
+    2: { symbol: "☽", aura: "II · High Priestess", subtitle: "直觉深邃 · 隐秘真理" },
+    3: { symbol: "♀", aura: "III · The Empress", subtitle: "丰饶繁衍 · 厚德载物" },
+    4: { symbol: "♂", aura: "IV · The Emperor", subtitle: "乾纲独断 · 秩序权威" },
+    5: { symbol: "♃", aura: "V · The Hierophant", subtitle: "精神传承 · 明师指路" },
+    6: { symbol: "⚢", aura: "VI · The Lovers", subtitle: "灵肉契合 · 神圣契约" },
+    7: { symbol: "♋", aura: "VII · The Chariot", subtitle: "乘风破浪 · 旗开得胜" },
+    8: { symbol: "♌", aura: "VIII · Strength", subtitle: "以柔克刚 · 慈悲定力" },
+    9: { symbol: "♍", aura: "IX · The Hermit", subtitle: "孤灯照夜 · 内求真道" },
+    10: { symbol: "☸", aura: "X · Wheel of Fortune", subtitle: "时空流转 · 因果循环" },
+    11: { symbol: "♎", aura: "XI · Justice", subtitle: "法理昭彰 · 业力平衡" },
+    12: { symbol: "♆", aura: "XII · The Hanged Man", subtitle: "逆向顿悟 · 灵性觉醒" },
+    13: { symbol: "♏", aura: "XIII · Death", subtitle: "旧局断灭 · 涅槃重生" },
+    14: { symbol: "♐", aura: "XIV · Temperance", subtitle: "甘露交融 · 动态平衡" },
+    15: { symbol: "♑", aura: "XV · The Devil", subtitle: "物质执念 · 照见阴影" },
+    16: { symbol: "♅", aura: "XVI · The Tower", subtitle: "假象崩解 · 惊雷破晓" },
+    17: { symbol: "♒", aura: "XVII · The Star", subtitle: "希望如泉 · 抚平创伤" },
+    18: { symbol: "♓", aura: "XVIII · The Moon", subtitle: "潜意识涌 · 拨开迷雾" },
+    19: { symbol: "☉", aura: "XIX · The Sun", subtitle: "如日中天 · 生命昂扬" },
+    20: { symbol: "♇", aura: "XX · Judgement", subtitle: "神圣号角 · 灵魂召选" },
+    21: { symbol: "♁", aura: "XXI · The World", subtitle: "环宇通达 · 大千圆满" }
   };
 
   class CardRenderer {
@@ -35,6 +35,7 @@
      * 渲染单张卡牌正面的 HTML 结构
      */
     static renderCardFrontHtml(card, isReversed = false, extraClasses = "") {
+      if (!card) return "";
       const reversedClass = isReversed ? "is-reversed" : "";
       const wuxingColorMap = {
         "木": "var(--wx-wood)",
@@ -46,76 +47,39 @@
 
       const wuxingColor = wuxingColorMap[card.wuxing] || "var(--gold-main)";
 
-      // 如果有高质量独立图片
-      if (card.image) {
-        return `
-          <div class="card-visual card-art-image ${reversedClass} ${extraClasses}" style="--element-glow: ${wuxingColor}">
-            <img src="${card.image}" alt="${card.nameCn}" class="card-img-element" loading="lazy" />
-            <div class="card-aura-glow"></div>
-            <div class="card-overlay-badge">
-              <span class="badge-wuxing" style="background:${wuxingColor}">${card.wuxing}</span>
-              <span class="badge-orientation">${isReversed ? "逆位" : "正位"}</span>
-            </div>
-            <div class="card-bottom-title">
-              <span class="card-num-label">${card.number}</span>
-              <span class="card-name-label">${card.nameCn}</span>
-            </div>
-          </div>
-        `;
+      // 智能解析全量高清独立画作素材
+      let imgSrc = card.image;
+      if (!imgSrc) {
+        if (card.arcana === "major" || (card.id !== undefined && card.id <= 21)) {
+          imgSrc = `assets/cards/major_${card.id}.jpg`;
+        } else if (card.suit) {
+          imgSrc = `assets/cards/suit_${card.suit}.jpg`;
+        } else {
+          imgSrc = "assets/cards/card_back.jpg";
+        }
       }
 
-      // 如果是专属定制的复古矢量卡牌
-      return this.generateProceduralCardHtml(card, isReversed, extraClasses, wuxingColor);
+      return `
+        <div class="card-visual card-art-image ${reversedClass} ${extraClasses}" style="--element-glow: ${wuxingColor}">
+          <img src="${imgSrc}" alt="${card.nameCn}" class="card-img-element" loading="lazy" />
+          <div class="card-aura-glow"></div>
+          <div class="card-overlay-badge">
+            <span class="badge-wuxing" style="background:${wuxingColor}">${card.wuxing}</span>
+            <span class="badge-orientation">${isReversed ? "逆位" : "正位"}</span>
+          </div>
+          <div class="card-bottom-title">
+            <span class="card-num-label">${card.number || ''}</span>
+            <span class="card-name-label">${card.nameCn || ''}</span>
+          </div>
+        </div>
+      `;
     }
 
     /**
      * 程序化生成精美复古神秘学牌面
      */
     static generateProceduralCardHtml(card, isReversed, extraClasses, wuxingColor) {
-      const reversedClass = isReversed ? "is-reversed" : "";
-      const suitIcons = {
-        "wands": { icon: "🔥", symbol: "🪵", aura: "Wands · 权杖", subtitle: "离火意志 · 开创进取" },
-        "cups": { icon: "💧", symbol: "🏆", aura: "Cups · 圣杯", subtitle: "坎水流芳 · 情感交融" },
-        "swords": { icon: "⚔️", symbol: "🗡️", aura: "Swords · 宝剑", subtitle: "乾金刚断 · 理智明辨" },
-        "pentacles": { icon: "🪙", symbol: "🌱", aura: "Pentacles · 星币", subtitle: "坤土纳宝 · 实体丰盛" }
-      };
-
-      const meta = ARCHETYPE_ICONS[card.id] || (card.suit ? suitIcons[card.suit] : { icon: "✦", symbol: "★", aura: card.nameEn, subtitle: card.nameEn });
-
-      return `
-        <div class="card-visual card-art-procedural ${reversedClass} ${extraClasses}" style="--element-glow: ${wuxingColor}">
-          <div class="procedural-border-frame">
-            <div class="frame-corner top-left">✦</div>
-            <div class="frame-corner top-right">✦</div>
-            <div class="frame-corner bottom-left">✦</div>
-            <div class="frame-corner bottom-right">✦</div>
-            
-            <div class="procedural-header">
-              <div class="proc-number">${card.number}</div>
-              <div class="proc-gua">${card.element ? card.element + '元素' : (card.wuxing ? '五行属' + card.wuxing : '')}</div>
-            </div>
-
-            <div class="procedural-center-art">
-              <div class="celestial-ring-outer"></div>
-              <div class="celestial-ring-inner"></div>
-              <div class="ink-center-symbol">${meta.icon}</div>
-              <div class="proc-archetype-text">${meta.aura}</div>
-              <div style="font-size: 0.62rem; color: rgba(255,255,255,0.6);">${meta.subtitle}</div>
-            </div>
-
-            <div class="procedural-footer">
-              <div class="proc-name-cn">${card.nameCn}</div>
-              <div class="proc-name-en">${card.nameEn}</div>
-            </div>
-          </div>
-
-          <div class="card-overlay-badge">
-            <span class="badge-wuxing" style="background:${wuxingColor}">${card.wuxing}</span>
-            <span class="badge-orientation">${isReversed ? "逆位" : "正位"}</span>
-          </div>
-          <div class="card-aura-glow"></div>
-        </div>
-      `;
+      return this.renderCardFrontHtml(card, isReversed, extraClasses);
     }
 
     /**
