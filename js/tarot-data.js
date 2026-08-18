@@ -155,7 +155,7 @@ const TAROT_DATA = [
     wuxing: "土",
     baguaGua: "艮",
     baguaDirection: "东北",
-    image: null,
+    image: "assets/cards/major_5.jpg",
     upright: {
       keywords: ["明师指路", "道法传承", "贵人结缘", "合规正道"],
       general: "艮山止欲，明理通幽。象征遵从正统伦理、寻得良师益友以及精神层面的归宿。",
@@ -211,7 +211,7 @@ const TAROT_DATA = [
     wuxing: "水",
     baguaGua: "震",
     baguaDirection: "正东",
-    image: null,
+    image: "assets/cards/major_7.jpg",
     upright: {
       keywords: ["勇往直前", "驭服双歧", "克服险阻", "旗开得胜"],
       general: "雷水解卦，乘风破浪。凭借坚定的意志力与高超的统御手腕，势如破竹攻克难关。",
@@ -239,7 +239,7 @@ const TAROT_DATA = [
     wuxing: "火",
     baguaGua: "离",
     baguaDirection: "正南",
-    image: null,
+    image: "assets/cards/major_8.jpg",
     upright: {
       keywords: ["以柔克刚", "调御狂澜", "内在勇气", "大爱包容"],
       general: "离火温照，柔能克刚。并非蛮力制胜，而是以极高的慈悲心、耐力与自信降服强敌。",
@@ -267,7 +267,7 @@ const TAROT_DATA = [
     wuxing: "土",
     baguaGua: "艮",
     baguaDirection: "东北",
-    image: null,
+    image: "assets/cards/major_9.jpg",
     upright: {
       keywords: ["返璞归真", "独行问道", "内省明心", "灯塔引航"],
       general: "艮止安顿，内观自在。暂时抽离外界的纷繁喧嚣，深入探寻灵魂深处的真理。",
@@ -323,7 +323,7 @@ const TAROT_DATA = [
     wuxing: "金",
     baguaGua: "兑",
     baguaDirection: "正西",
-    image: null,
+    image: "assets/cards/major_11.jpg",
     upright: {
       keywords: ["因果不虚", "公允决断", "契约落定", "权衡利弊"],
       general: "兑金秉秋，铁面无私。以理性、客观与逻辑为准绳，一分耕耘必有一分收获。",
@@ -351,7 +351,7 @@ const TAROT_DATA = [
     wuxing: "水",
     baguaGua: "坎",
     baguaDirection: "正北",
-    image: null,
+    image: "assets/cards/major_12.jpg",
     upright: {
       keywords: ["舍得之道", "换位思考", "悬置沉潜", "大彻大悟"],
       general: "倒悬观世，柳暗花明。看似受困停滞，实则是为了获得更高维度的视角与精神升华。",
@@ -379,7 +379,7 @@ const TAROT_DATA = [
     wuxing: "水",
     baguaGua: "坎",
     baguaDirection: "正北",
-    image: null,
+    image: "assets/cards/major_13.jpg",
     upright: {
       keywords: ["破茧成蝶", "旧局终结", "彻底蜕变", "万象更新"],
       general: "置之死地而后生。告别腐朽的过去，清理积弊，才能迎接全新的能量进驻。",
@@ -407,7 +407,7 @@ const TAROT_DATA = [
     wuxing: "火",
     baguaGua: "离",
     baguaDirection: "正南",
-    image: null,
+    image: "assets/cards/major_14.jpg",
     upright: {
       keywords: ["水火既济", "阴阳调和", "中庸之道", "身心自愈"],
       general: "水火相融，生生不息。懂得平衡各方利益与情绪，达到内在的极致宁静与外在和谐。",
@@ -435,7 +435,7 @@ const TAROT_DATA = [
     wuxing: "土",
     baguaGua: "坤",
     baguaDirection: "西南",
-    image: null,
+    image: "assets/cards/major_15.jpg",
     upright: {
       keywords: ["欲望束缚", "执念深重", "物质沉溺", "看破幻象"],
       general: "土浊气沉，被物欲或情绪执念所囚禁。唯有认清虚妄，方能斩断心灵的锁链。",
@@ -463,7 +463,7 @@ const TAROT_DATA = [
     wuxing: "火",
     baguaGua: "震",
     baguaDirection: "正东",
-    image: null,
+    image: "assets/cards/major_16.jpg",
     upright: {
       keywords: ["惊雷破旧", "突发巨变", "幻象破灭", "重塑根基"],
       general: "天雷击顶，大厦倾覆。看似残酷的突发变故，实则是将虚妄的沙上之塔击碎，逼你重立根基。",
@@ -575,7 +575,7 @@ const TAROT_DATA = [
     wuxing: "火",
     baguaGua: "震",
     baguaDirection: "正东",
-    image: null,
+    image: "assets/cards/major_20.jpg",
     upright: {
       keywords: ["号角吹响", "灵魂觉醒", "重大决断", "因果清算"],
       general: "春雷一声发，万物尽昭苏。站在人生重大的转折点，听从内心神圣的召唤，彻底蜕变。",
@@ -663,7 +663,7 @@ const TAROT_DATA = [
     wuxing: "火",
     baguaGua: "离",
     baguaDirection: "正南",
-    image: null,
+    image: "assets/cards/suit_wands.jpg",
     upright: {
       keywords: ["运筹帷幄", "登高望远", "海外拓展", "战略决断"],
       general: "手握乾坤，站高谋远，为下一步扩张绘制蓝图。",
@@ -692,7 +692,7 @@ const TAROT_DATA = [
     wuxing: "火",
     baguaGua: "离",
     baguaDirection: "正南",
-    image: null,
+    image: "assets/cards/suit_wands.jpg",
     upright: {
       keywords: ["大船入港", "拓展收获", "跨界合作", "展望未来"],
       general: "春江水暖，帆影重重，早期的布局开始迎来正面回报。",
@@ -721,7 +721,7 @@ const TAROT_DATA = [
     wuxing: "木",
     baguaGua: "巽",
     baguaDirection: "东南",
-    image: null,
+    image: "assets/cards/suit_wands.jpg",
     upright: {
       keywords: ["家和万事兴", "乔迁庆典", "里程碑", "安居乐业"],
       general: "四根锦柱结花冠，代表稳固和谐的家宅基业与庆贺胜利。",
@@ -750,7 +750,7 @@ const TAROT_DATA = [
     wuxing: "火",
     baguaGua: "离",
     baguaDirection: "正南",
-    image: null,
+    image: "assets/cards/suit_wands.jpg",
     upright: {
       keywords: ["重任在肩", "竭尽全力", "压力过载", "终点在望"],
       general: "独挑重担步履维艰，虽劳碌辛苦但曙光已在眼前，需懂得适度分权。",
@@ -810,7 +810,7 @@ const TAROT_DATA = [
     wuxing: "水",
     baguaGua: "坎",
     baguaDirection: "正北",
-    image: null,
+    image: "assets/cards/suit_cups.jpg",
     upright: {
       keywords: ["举杯同饮", "契合默契", "亲密合作", "心有灵犀"],
       general: "双杯相对，阴阳交泰。代表一对一的真挚联结与平等共鸣。",
@@ -839,7 +839,7 @@ const TAROT_DATA = [
     wuxing: "水",
     baguaGua: "震",
     baguaDirection: "正东",
-    image: null,
+    image: "assets/cards/suit_cups.jpg",
     upright: {
       keywords: ["高朋满座", "庆功分享", "圈层融合", "喜事盈门"],
       general: "三女共舞，举杯相庆。代表社交圈层活跃、团队协作成功与快乐共享。",
@@ -899,7 +899,7 @@ const TAROT_DATA = [
     wuxing: "金",
     baguaGua: "兑",
     baguaDirection: "正西",
-    image: null,
+    image: "assets/cards/suit_swords.jpg",
     upright: {
       keywords: ["心如刀绞", "直面伤痛", "真相刺眼", "排毒释怀"],
       general: "风雨穿心，暴风雨洗礼。虽有钻心之痛，实则是为了将脓包挑破，引出陈年积毒。",
@@ -930,7 +930,7 @@ const TAROT_DATA = [
     wuxing: "土",
     baguaGua: "坤",
     baguaDirection: "西南",
-    image: null,
+    image: "assets/cards/suit_pentacles.jpg",
     upright: {
       keywords: ["财源初现", "实体落地", "基业发轫", "丰厚馈赠"],
       general: "坤土纳宝，金种破土。代表实实在在的物质回报、稳固的商业根基与财富种子。",
@@ -959,7 +959,7 @@ const TAROT_DATA = [
     wuxing: "土",
     baguaGua: "艮",
     baguaDirection: "东北",
-    image: null,
+    image: "assets/cards/suit_pentacles.jpg",
     upright: {
       keywords: ["金玉满堂", "家族基业", "世代荫庇", "安居乐业"],
       general: "三世同堂，富甲一方。象征家族兴旺、财富传承、长期稳定的繁荣与厚重底蕴。",

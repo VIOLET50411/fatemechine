@@ -117,6 +117,19 @@ body {
   overflow-x: hidden;
   position: relative;
   transition: background-color 0.3s ease, color 0.3s ease;
+  touch-action: manipulation;
+}
+
+/* 防止移动端聚焦输入框时页面异常放大 */
+input, select, textarea, button {
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
 }
 
 [data-theme="light"] body {
