@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,11 +18,20 @@
   <header class="app-header">
     <div class="header-actions">
       <button type="button" class="btn-ios-glass" id="btn-open-history" title="查看过往占卜记录">
-        <span class="ios-btn-icon">📜</span>
+        <svg class="ios-btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
         <span class="ios-btn-text">占卜记录</span>
       </button>
       <button type="button" class="btn-ios-glass" id="btn-open-settings" title="配置与外观设置">
-        <span class="ios-btn-icon">⚙️</span>
+        <svg class="ios-btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
         <span class="ios-btn-text">设置</span>
       </button>
     </div>
@@ -189,61 +198,8 @@
           </div>
         </div>
 
-        <!-- 右侧命盘卡片 -->
-        <div class="bazi-chart-card" id="bazi-chart-display">
-          <div class="bazi-chart-header">
-            <div>
-              <span class="bazi-badge-gold" id="bazi-day-master-tag">日主天干：庚金</span>
-              <span class="bazi-pillars-summary" id="bazi-pillars-text">（乙亥 甲申 庚午 壬午）</span>
-            </div>
-            <button type="button" class="btn-toggle-bazi-mode" id="btn-toggle-bazi-mode">
-              <span>📖</span> <span id="bazi-mode-label">切换通俗说明</span>
-            </button>
-          </div>
-
-          <!-- 四柱八字排盘表 -->
-          <div class="bazi-pillars-grid">
-            <div class="pillar-col">
-              <span class="p-tag">年柱</span>
-              <span class="p-val" id="pillar-year-val">乙亥</span>
-              <span class="p-wuxing" id="pillar-year-wx">木水</span>
-            </div>
-            <div class="pillar-col">
-              <span class="p-tag">月柱</span>
-              <span class="p-val" id="pillar-month-val">甲申</span>
-              <span class="p-wuxing" id="pillar-month-wx">木金</span>
-            </div>
-            <div class="pillar-col active-master">
-              <span class="p-tag">日柱 (本命)</span>
-              <span class="p-val master-stem" id="pillar-day-val">庚午</span>
-              <span class="p-wuxing" id="pillar-day-wx">金火</span>
-            </div>
-            <div class="pillar-col">
-              <span class="p-tag">时柱</span>
-              <span class="p-val" id="pillar-hour-val">壬午</span>
-              <span class="p-wuxing" id="pillar-hour-wx">水火</span>
-            </div>
-          </div>
-
-          <!-- 五行强弱概览 -->
-          <div class="bazi-wuxing-summary-row">
-            <div class="bazi-master-info">
-              <span>日元本命五行：<strong id="bazi-master-element" style="color:var(--wx-metal)">金</strong></span>
-              <span>身旺/身弱：<strong id="bazi-strength-status" class="status-badge">身弱</strong></span>
-              <span>格局喜用神：<strong id="bazi-favor-element" style="color:var(--wx-earth)">土、金</strong></span>
-            </div>
-            <div class="bazi-wuxing-bars" id="bazi-wuxing-bars-container">
-              <!-- 动态填充五行统计条 -->
-            </div>
-          </div>
-
-          <!-- 命理详析与通俗建议 -->
-          <div class="bazi-explanation-box">
-            <p class="bazi-exp-text" id="bazi-explanation-text">
-              日主庚金生于初秋，金水相涵。做事果断刚毅，重情重义；适宜以厚土培金、以比劫助身，在西方或西南方位布局更利于气场生旺。
-            </p>
-          </div>
-        </div>
+        <!-- 右侧实时命盘卡片容器 -->
+        <div id="bazi-result-preview"></div>
       </div>
     </section>
 
@@ -492,13 +448,23 @@
           <div class="ios-group-card">
             <div class="ios-row-item">
               <div class="ios-row-left">
-                <span class="ios-row-icon">☀️</span>
+                <svg class="ios-row-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
                 <span class="ios-row-label">外观</span>
               </div>
               <div class="ios-row-right">
                 <select id="select-theme-mode" class="ios-inline-select">
+                  <option value="light" selected>浅色模式</option>
                   <option value="dark">深色模式</option>
-                  <option value="light">浅色模式</option>
                 </select>
                 <span class="ios-chevron-select">⬍</span>
               </div>
@@ -506,7 +472,11 @@
 
             <div class="ios-row-item">
               <div class="ios-row-left">
-                <span class="ios-row-icon">🎴</span>
+                <svg class="ios-row-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
                 <span class="ios-row-label">牌组</span>
               </div>
               <div class="ios-row-right">
@@ -526,7 +496,9 @@
           <div class="ios-group-card">
             <div class="ios-row-item">
               <div class="ios-row-left">
-                <span class="ios-row-icon">🔑</span>
+                <svg class="ios-row-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 2l-2 2m-1.5 1.5L14 9l-1.5-1.5L10 10l1.5 1.5-4 4a5 5 0 1 1-7-7l4-4 1.5 1.5L9 2l2.5 2.5 1.5-1.5L17.5 7 21 2z"></path>
+                </svg>
                 <span class="ios-row-label">API 密钥</span>
               </div>
               <div class="ios-row-right" style="flex: 1; max-width: 62%;">
@@ -536,7 +508,11 @@
 
             <div class="ios-row-item">
               <div class="ios-row-left">
-                <span class="ios-row-icon">🌐</span>
+                <svg class="ios-row-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
                 <span class="ios-row-label">接口地址</span>
               </div>
               <div class="ios-row-right" style="flex: 1; max-width: 62%;">
@@ -546,7 +522,9 @@
 
             <div class="ios-row-item">
               <div class="ios-row-left">
-                <span class="ios-row-icon">🧠</span>
+                <svg class="ios-row-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
                 <span class="ios-row-label">模型</span>
               </div>
               <div class="ios-row-right">
@@ -562,7 +540,12 @@
           <div class="ios-group-card">
             <div class="ios-row-item clickable" id="btn-settings-open-history">
               <div class="ios-row-left">
-                <span class="ios-row-icon">📜</span>
+                <svg class="ios-row-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
                 <span class="ios-row-label">查看占卜记录</span>
               </div>
               <div class="ios-row-right">
@@ -572,7 +555,10 @@
 
             <div class="ios-row-item clickable" id="btn-clear-history-settings">
               <div class="ios-row-left">
-                <span class="ios-row-icon">🗑️</span>
+                <svg class="ios-row-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
                 <span class="ios-row-label" style="color: #ff3b30;">清空占卜历史</span>
               </div>
               <div class="ios-row-right">

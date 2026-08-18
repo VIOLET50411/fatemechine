@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     activeResultTab: "simple", // 'simple' | 'deepseek'
     isBaziDetailed: false,
     history: [],
-    theme: "dark" // 'dark' | 'light'
+    theme: "light" // 'light' | 'dark'
   };
 
   // 控制器实例
@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     sectionResult: document.getElementById("section-result"),
 
     // 常用按钮
-    btnToggleTheme: document.getElementById("btn-toggle-theme"),
     btnOpenSettings: document.getElementById("btn-open-settings"),
     btnCloseSettings: document.getElementById("btn-close-settings"),
     btnSaveSettings: document.getElementById("btn-save-settings"),
@@ -70,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 主题控制
   function initTheme() {
-    const savedTheme = localStorage.getItem("tianji_theme") || "dark";
+    const savedTheme = localStorage.getItem("tianji_theme") || "light";
     setTheme(savedTheme);
   }
 
@@ -232,7 +231,11 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="bazi-pillars-summary">${res.fourPillarsText}</span>
           </div>
           <button type="button" class="btn-toggle-bazi-mode" id="btn-toggle-bazi-mode">
-            ${AppState.isBaziDetailed ? "切换为通俗白话" : "切换为专业命理"}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: -2px;">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+            <span>${AppState.isBaziDetailed ? "切换为通俗说明" : "切换为专业说明"}</span>
           </button>
         </div>
 

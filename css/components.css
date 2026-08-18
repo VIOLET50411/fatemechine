@@ -366,7 +366,7 @@
   -webkit-appearance: none;
   background: transparent;
   border: none;
-  color: #007aff;
+  color: #1c1c1e;
   font-size: 0.92rem;
   font-weight: 500;
   padding-right: 0.25rem;
@@ -375,8 +375,18 @@
   outline: none;
 }
 
+.ios-inline-select option {
+  background: #ffffff;
+  color: #000000;
+}
+
 [data-theme="dark"] .ios-inline-select {
-  color: #0a84ff;
+  color: #f5f6fa;
+}
+
+[data-theme="dark"] .ios-inline-select option {
+  background: #2c2c2e;
+  color: #ffffff;
 }
 
 .ios-chevron-select {
