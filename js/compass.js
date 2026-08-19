@@ -48,13 +48,16 @@
 
       // 2. 罗盘拖拽交互（鼠标与触控）
       if (this.dialEl) {
-        this.dialEl.addEventListener("mousedown", this.onDragStart.bind(this));
-        window.addEventListener("mousemove", this.onDragMove.bind(this));
-        window.addEventListener("mouseup", this.onDragEnd.bind(this));
+        // 桌面端鼠标交互
+        this.dialEl.addEventListener("mousedown", this.onMouseDown.bind(this));
+        window.addEventListener("mousemove", this.onMouseMove.bind(this));
+        window.addEventListener("mouseup", this.onMouseUp.bind(this));
 
-        this.dialEl.addEventListener("touchstart", this.onDragStart.bind(this), { passive: false });
-        window.addEventListener("touchmove", this.onDragMove.bind(this), { passive: false });
-        window.addEventListener("touchend", this.onDragEnd.bind(this));
+        // 移动端触控交互（允许正常上下滑动页面）
+        this.dialEl.addEventListener("touchstart", this.onTouchStart.bind(this), { passive: true });
+        window.addEventListener("touchmove", this.onTouchMove.bind(this), { passive: false });
+        window.addEventListener("touchend", this.onTouchEnd.bind(this));
+        window.addEventListener("touchcancel", this.onTouchEnd.bind(this));
       }
 
       // 3. 陀螺仪传感器按钮
@@ -73,8 +76,8 @@
       const rect = this.dialEl.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const clientX = e.touches && e.touches.length > 0 ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches && e.touches.length > 0 ? e.touches[0].clientY : e.clientY;
 
       const dx = clientX - centerX;
       const dy = clientY - centerY;
@@ -84,13 +87,14 @@
       return deg;
     }
 
-    onDragStart(e) {
+    // 鼠标事件
+    onMouseDown(e) {
       this.isDragging = true;
       this.startAngle = this.getAngleFromEvent(e);
       if (e.cancelable) e.preventDefault();
     }
 
-    onDragMove(e) {
+    onMouseMove(e) {
       if (!this.isDragging) return;
       if (e.cancelable) e.preventDefault();
 
@@ -103,7 +107,58 @@
       this.detectDirectionFromAngle(this.currentRotation);
     }
 
-    onDragEnd() {
+    onMouseUp() {
+      this.isDragging = false;
+    }
+
+    // 触控事件（智能区分垂直滑动与横向旋转）
+    onTouchStart(e) {
+      if (!e.touches || e.touches.length === 0) return;
+      this.touchStartX = e.touches[0].clientX;
+      this.touchStartY = e.touches[0].clientY;
+      this.startAngle = this.getAngleFromEvent(e);
+      this.touchIntent = null; // 'scroll' | 'rotate' | null
+    }
+
+    onTouchMove(e) {
+      if (!e.touches || e.touches.length === 0) return;
+      if (this.touchIntent === "scroll") {
+        // 允许页面正常原生上下滚动，不做任何阻拦
+        return;
+      }
+
+      const curX = e.touches[0].clientX;
+      const curY = e.touches[0].clientY;
+      const diffX = curX - this.touchStartX;
+      const diffY = curY - this.touchStartY;
+
+      // 尚未确定意图时进行手势分析
+      if (!this.touchIntent) {
+        // 垂直移动分量明显大于水平移动，判定为用户想要滑动页面
+        if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 5) {
+          this.touchIntent = "scroll";
+          return;
+        }
+        // 水平/圆弧滑动明显，判定为旋转罗盘
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 8) {
+          this.touchIntent = "rotate";
+        }
+      }
+
+      if (this.touchIntent === "rotate") {
+        if (e.cancelable) e.preventDefault();
+        const currentAngle = this.getAngleFromEvent(e);
+        const diff = currentAngle - this.startAngle;
+        this.currentRotation = (this.currentRotation + diff + 360) % 360;
+        this.startAngle = currentAngle;
+
+        this.updateDialRotation(this.currentRotation);
+        this.detectDirectionFromAngle(this.currentRotation);
+      }
+    }
+
+    onTouchEnd() {
+      this.touchIntent = null;
       this.isDragging = false;
     }
 

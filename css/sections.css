@@ -482,7 +482,7 @@
   justify-content: center;
   cursor: grab;
   user-select: none;
-  touch-action: none;
+  touch-action: pan-y;
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
 }
@@ -1543,6 +1543,13 @@
 @media (max-width: 600px) {
   .hero-main-title {
     font-size: 2.1rem;
+  }
+  .compass-dial-outer {
+    width: clamp(230px, 68vw, 280px);
+    height: clamp(230px, 68vw, 280px);
+  }
+  .compass-layout-container {
+    gap: 1.25rem;
   }
   .bazi-pillars-grid {
     grid-template-columns: repeat(2, 1fr);
