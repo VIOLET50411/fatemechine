@@ -981,7 +981,8 @@ const TAROT_DATA = [
 
 // 辅助检索工具函数
 function getCardById(id) {
-  return TAROT_DATA.find(c => c.id === id) || TAROT_DATA[0];
+  if (id === undefined || id === null) return TAROT_DATA[0];
+  return TAROT_DATA.find(c => c.id == id || String(c.id) === String(id)) || TAROT_DATA[0];
 }
 
 function getMajorArcanaCards() {

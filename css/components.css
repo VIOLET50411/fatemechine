@@ -631,7 +631,15 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 0 16px rgba(212, 175, 55, 0.15) !important;
 }
 
-.card-back-img {
+/* 卡牌正面专属背景保底（避免浅色模式下白屏闪烁） */
+.card-art-image,
+[data-theme="light"] .card-art-image {
+  background: radial-gradient(circle at 50% 50%, #1a2233 0%, #0a0d18 100%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+}
+
+.card-back-img,
+.card-front-img {
   position: absolute;
   top: 0;
   left: 0;
@@ -673,6 +681,22 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.card-visual.thumb-mode {
+  border-radius: var(--radius-sm);
+}
+
+.card-visual.thumb-mode .card-bottom-title {
+  padding: 0.25rem 0.35rem;
+}
+
+.card-visual.thumb-mode .card-name-label {
+  font-size: 0.78rem;
+}
+
+.card-visual.thumb-mode .card-num-label {
+  font-size: 0.7rem;
 }
 
 .card-visual.is-reversed .card-img-element {

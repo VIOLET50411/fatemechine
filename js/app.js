@@ -476,7 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="card-detail-body">
             <div class="card-mini-thumb">
-              ${CardRenderer.renderCardFrontHtml(getCardById(c.cardId), c.isReversed, "thumb-mode")}
+              ${CardRenderer.renderCardFrontHtml(c.card || getCardById(c.cardId), c.isReversed, "thumb-mode")}
             </div>
             <div class="card-detail-content">
               <div class="card-name-row">

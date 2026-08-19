@@ -61,7 +61,7 @@
 
       return `
         <div class="card-visual card-art-image ${reversedClass} ${extraClasses}" style="--element-glow: ${wuxingColor}">
-          <img src="${imgSrc}" alt="${card.nameCn}" class="card-img-element" loading="lazy" />
+          <img src="${imgSrc}" alt="${card.nameCn}" class="card-img-element card-front-img" loading="eager" decoding="async" />
           <div class="card-aura-glow"></div>
           <div class="card-overlay-badge">
             <span class="badge-wuxing" style="background:${wuxingColor}">${card.wuxing}</span>

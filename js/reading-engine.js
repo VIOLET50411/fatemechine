@@ -58,6 +58,7 @@
           positionBagua: spreadPos.bagua,
           positionWuxing: spreadPos.wuxing,
           positionAspect: spreadPos.aspect,
+          card: card,
           cardId: card.id,
           cardName: card.nameCn,
           cardNameEn: card.nameEn,
