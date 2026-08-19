@@ -88,7 +88,12 @@
     static renderCardBackHtml() {
       return `
         <div class="card-visual card-art-back">
-          <img src="assets/cards/card_back.jpg" alt="牌背" class="card-img-element" />
+          <img src="assets/cards/card_back.jpg" alt="牌背" class="card-img-element card-back-img" loading="eager" decoding="async" />
+          <div class="card-back-ornament">
+            <div class="card-back-frame">
+              <div class="card-back-gold-star">✦</div>
+            </div>
+          </div>
           <div class="card-aura-glow"></div>
         </div>
       `;
